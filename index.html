@@ -136,8 +136,6 @@ background:black;
 overflow:hidden;
 }
 
-/* TITLE */
-
 .gallery-title{
 position:absolute;
 top:45px;
@@ -185,7 +183,7 @@ transform:translateX(-50%);
 font-size:70px;
 }
 
-/* FASTER FLOAT */
+/* SPEED */
 
 @keyframes flyUp{
 0%{
@@ -195,8 +193,6 @@ transform:translateY(0);
 transform:translateY(-190vh);
 }
 }
-
-/* POSITIONS */
 
 .b1{
 left:2%;
@@ -321,6 +317,12 @@ padding:20px;
 
 <body>
 
+<!-- MUSIC -->
+
+<audio id="birthdayMusic" loop>
+<source src="music.mp3.mp3" type="audio/mp3">
+</audio>
+
 <!-- HEARTS -->
 
 <div id="heartsContainer"></div>
@@ -399,8 +401,6 @@ Our Cute Memories 💖
 <img src="./photo4.jpg.jpg">
 </div>
 
-<!-- BUTTON -->
-
 <button id="memoryBtn">
 💖 Test Your Muscle Memory Of Love And Bond 💖
 </button>
@@ -418,6 +418,8 @@ Pink Test Page 💕
 </div>
 
 <script>
+
+const birthdayMusic = document.getElementById("birthdayMusic");
 
 /* HEARTS */
 
@@ -478,11 +480,14 @@ document.getElementById("seconds").innerHTML = seconds;
 
 document.getElementById("openBtn").onclick=()=>{
 
+/* MUSIC START */
+birthdayMusic.play();
+
 document.getElementById("countdownPage").style.display="none";
 
 document.getElementById("galleryPage").style.display="flex";
 
-/* BUTTON AFTER PHOTOS GO UP */
+/* BUTTON AFTER PHOTOS */
 
 setTimeout(()=>{
 
