@@ -155,7 +155,6 @@ animation:fly linear infinite;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
 }
 
 .balloon img{
@@ -166,7 +165,6 @@ background:black;
 border-radius:35px;
 border:6px solid white;
 box-shadow:0 0 35px white;
-padding:0;
 }
 
 /* BALLOON TOP */
@@ -178,18 +176,6 @@ top:-70px;
 left:50%;
 transform:translateX(-50%);
 font-size:70px;
-}
-
-/* STRING */
-
-.balloon::after{
-content:"";
-position:absolute;
-width:2px;
-height:140px;
-background:white;
-left:50%;
-bottom:-140px;
 }
 
 /* FLOAT */
