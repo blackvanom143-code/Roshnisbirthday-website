@@ -22,12 +22,12 @@ overflow:hidden;
 background:#ffc0cb;
 }
 
-/* PAGE */
+/* PAGES */
 
 .page{
+position:absolute;
 width:100%;
 height:100vh;
-position:absolute;
 top:0;
 left:0;
 display:flex;
@@ -42,11 +42,11 @@ overflow:hidden;
 .heart{
 position:absolute;
 font-size:30px;
-animation:float 10s linear infinite;
+animation:hearts 10s linear infinite;
 opacity:0.8;
 }
 
-@keyframes float{
+@keyframes hearts{
 0%{
 transform:translateY(100vh) scale(0.5);
 opacity:0;
@@ -57,7 +57,7 @@ opacity:1;
 }
 }
 
-/* FIRST PAGE */
+/* PAGE 1 */
 
 #countdownPage{
 background:#ffc0cb;
@@ -68,15 +68,15 @@ text-align:center;
 .main-title{
 font-size:70px;
 font-weight:700;
-text-shadow:0 0 20px rgba(255,255,255,0.7);
+text-shadow:0 0 20px rgba(255,255,255,0.8);
 margin-bottom:20px;
-z-index:2;
+z-index:5;
 }
 
 .subtitle{
 font-size:24px;
 margin-bottom:40px;
-z-index:2;
+z-index:5;
 }
 
 .countdown{
@@ -84,7 +84,7 @@ display:flex;
 gap:20px;
 flex-wrap:wrap;
 justify-content:center;
-z-index:2;
+z-index:5;
 }
 
 .box{
@@ -97,7 +97,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-box-shadow:0 0 30px rgba(255,255,255,0.3);
+box-shadow:0 0 30px rgba(255,255,255,0.4);
 }
 
 .box h1{
@@ -118,44 +118,35 @@ font-size:24px;
 font-weight:600;
 background:white;
 color:#ff4f81;
-cursor:pointer;
-transition:0.4s;
-box-shadow:0 0 30px rgba(255,255,255,0.5);
-z-index:2;
-}
-
-#openBtn:hover{
-transform:scale(1.08);
-}
-
-.locked{
-opacity:0.5;
 cursor:not-allowed;
+opacity:0.5;
+box-shadow:0 0 30px rgba(255,255,255,0.6);
+z-index:5;
 }
 
-/* GALLERY PAGE */
+/* PAGE 2 */
 
 #galleryPage{
-background:black;
 display:none;
+background:black;
 overflow:hidden;
 }
 
 .gallery-title{
 position:absolute;
-top:60px;
+top:50px;
 font-size:65px;
-color:white;
 font-weight:700;
-text-shadow:0 0 20px white;
+color:white;
+text-shadow:0 0 25px white;
 z-index:5;
 }
 
-/* BALLOONS */
+/* BALLOON */
 
 .balloon{
 position:absolute;
-bottom:-400px;
+bottom:-450px;
 width:240px;
 height:340px;
 animation:fly linear infinite;
@@ -173,7 +164,7 @@ box-shadow:0 0 35px white;
 .balloon::before{
 content:"🎈";
 position:absolute;
-top:-45px;
+top:-55px;
 left:50%;
 transform:translateX(-50%);
 font-size:70px;
@@ -183,10 +174,10 @@ font-size:70px;
 content:"";
 position:absolute;
 width:2px;
-height:130px;
+height:140px;
 background:white;
 left:50%;
-bottom:-130px;
+bottom:-140px;
 }
 
 @keyframes fly{
@@ -194,19 +185,19 @@ bottom:-130px;
 transform:translateY(0);
 }
 100%{
-transform:translateY(-170vh);
+transform:translateY(-180vh);
 }
 }
 
 /* POSITIONS */
 
 .b1{
-left:3%;
+left:2%;
 animation-duration:18s;
 }
 
 .b2{
-left:28%;
+left:27%;
 animation-duration:22s;
 }
 
@@ -265,7 +256,7 @@ Waiting for the most special day ✨
 
 </div>
 
-<button id="openBtn" class="locked">
+<button id="openBtn">
 🔒 Locked Until Birthday
 </button>
 
@@ -279,20 +270,28 @@ Waiting for the most special day ✨
 Our Cute Memories ❤️
 </h1>
 
+<!-- PHOTO 1 -->
+
 <div class="balloon b1">
-<img src="photo1.jpg.jpg">
+<img src="./photo1.jpg.jpg">
 </div>
+
+<!-- PHOTO 2 -->
 
 <div class="balloon b2">
-<img src="photo2.jpg.jpg">
+<img src="./photo2.jpg.jpg">
 </div>
+
+<!-- PHOTO 3 -->
 
 <div class="balloon b3">
-<img src="photo3.jpg.jpg">
+<img src="./photo3.jpg.jpg">
 </div>
 
+<!-- PHOTO 4 -->
+
 <div class="balloon b4">
-<img src="photo4.jpg.jpg">
+<img src="./photo4.jpg.jpg">
 </div>
 
 </div>
@@ -319,11 +318,11 @@ document.getElementById("hearts").appendChild(heart);
 
 }
 
-/* BIRTHDAY DATE */
+/* DATE */
 
 const targetDate = new Date("June 26, 2026 00:00:00").getTime();
 
-const btn=document.getElementById("openBtn");
+const btn = document.getElementById("openBtn");
 
 setInterval(()=>{
 
@@ -336,16 +335,17 @@ const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
 const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
 const seconds = Math.floor((distance % (1000*60)) / 1000);
 
-document.getElementById("days").innerHTML=days;
-document.getElementById("hours").innerHTML=hours;
-document.getElementById("minutes").innerHTML=minutes;
-document.getElementById("seconds").innerHTML=seconds;
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
 
 if(distance <= 0){
 
 btn.innerHTML="🎁 Open Surprise 🎁";
 
-btn.classList.remove("locked");
+btn.style.cursor="pointer";
+btn.style.opacity="1";
 
 btn.onclick=()=>{
 
@@ -358,6 +358,21 @@ document.getElementById("galleryPage").style.display="flex";
 }
 
 },1000);
+
+/* TESTING MODE */
+/* REMOVE THIS LATER */
+
+document.getElementById("openBtn").innerHTML="🎁 Open Surprise 🎁";
+document.getElementById("openBtn").style.cursor="pointer";
+document.getElementById("openBtn").style.opacity="1";
+
+document.getElementById("openBtn").onclick=()=>{
+
+document.getElementById("countdownPage").style.display="none";
+
+document.getElementById("galleryPage").style.display="flex";
+
+};
 
 </script>
 
