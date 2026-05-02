@@ -38,7 +38,7 @@ flex-direction:column;
 overflow:hidden;
 }
 
-/* HEARTS */
+/* FLOATING HEARTS */
 
 .heart{
 position:absolute;
@@ -303,11 +303,6 @@ font-size:22px;
 font-weight:bold;
 cursor:pointer;
 box-shadow:0 0 25px hotpink;
-transition:0.3s;
-}
-
-#playQuizBtn:hover{
-transform:scale(1.08);
 }
 
 /* QUIZ PAGE */
@@ -360,13 +355,6 @@ font-weight:bold;
 background:white;
 color:#ff2e74;
 cursor:pointer;
-transition:0.3s;
-}
-
-.answer-btn:hover{
-transform:scale(1.05);
-background:#ff2e74;
-color:white;
 }
 
 /* COUPON POPUP */
@@ -441,7 +429,8 @@ text-shadow:0 0 25px hotpink;
 }
 
 .downloadBtn,
-#nextBlankPageBtn{
+#nextBlankPageBtn,
+#surpriseBtn{
 margin-top:20px;
 padding:18px 40px;
 border:none;
@@ -452,27 +441,78 @@ font-size:22px;
 font-weight:bold;
 cursor:pointer;
 box-shadow:0 0 25px hotpink;
-transition:0.3s;
 }
 
-.downloadBtn:hover,
-#nextBlankPageBtn:hover{
-transform:scale(1.08);
+/* LOVE LETTER PAGE */
+
+#loveLetterPage{
+display:none;
+background:#ffc7d8;
+padding:30px;
+overflow:auto;
 }
 
-/* LAST PAGE */
+.love-letter-box{
+width:90%;
+max-width:850px;
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(12px);
+padding:45px;
+border-radius:35px;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+text-align:center;
+}
 
-#pinkBlankPage{
+.love-title{
+font-size:58px;
+color:white;
+text-shadow:0 0 20px hotpink;
+margin-bottom:30px;
+}
+
+.love-paragraph{
+font-size:24px;
+line-height:2;
+color:white;
+}
+
+/* SECRET PAGE */
+
+#secretPlanPage{
 display:none;
 background:#ffc0cb;
+padding:30px;
+overflow:auto;
 }
 
-.blank-title{
+.secret-box{
+width:90%;
+max-width:850px;
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(12px);
+padding:45px;
+border-radius:35px;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+text-align:center;
+}
+
+.secret-title{
 font-size:70px;
 color:white;
-text-shadow:0 0 25px hotpink;
-text-align:center;
-padding:20px;
+text-shadow:0 0 20px hotpink;
+margin-bottom:30px;
+}
+
+.secret-text{
+font-size:24px;
+line-height:2;
+color:white;
+}
+
+.ending-line{
+margin-top:35px;
+font-size:40px;
+color:#ff2e74;
 }
 
 /* MOBILE */
@@ -489,44 +529,13 @@ font-size:48px;
 padding:0 20px;
 }
 
-.box{
-width:120px;
-height:120px;
-}
-
-.box h1{
-font-size:40px;
-}
-
-.balloon{
-width:170px;
-height:170px;
-}
-
-#memoryBtn{
-font-size:18px;
-padding:18px 25px;
-width:85%;
-}
-
-.rules-title{
-font-size:38px;
-}
-
-.rules-list{
-font-size:18px;
-}
-
-.question-card h2{
-font-size:24px;
-}
-
 .answers{
 grid-template-columns:1fr;
 }
 
-.blank-title{
-font-size:42px;
+.love-paragraph,
+.secret-text{
+font-size:18px;
 }
 
 }
@@ -537,13 +546,9 @@ font-size:42px;
 
 <body>
 
-<!-- MUSIC -->
-
 <audio id="birthdayMusic" loop>
 <source src="music.mp3.mp3" type="audio/mp3">
 </audio>
-
-<!-- HEARTS -->
 
 <div id="heartsContainer"></div>
 
@@ -632,13 +637,9 @@ Love Bond Rules 💖
 <ul class="rules-list">
 
 <li>💋 Every correct answer earns one Kiss Coupon</li>
-
 <li>❤️ No cheating allowed baby</li>
-
 <li>✨ Think carefully before answering</li>
-
 <li>🎟️ All coupons can be claimed at the end</li>
-
 <li>😭 Wrong answers may break Modak’s heart</li>
 
 </ul>
@@ -670,21 +671,10 @@ Loading Question...
 
 <div class="answers">
 
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 1
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 2
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 3
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 4
-</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 1</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 2</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 3</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 4</button>
 
 </div>
 
@@ -694,7 +684,7 @@ Option 4
 
 </div>
 
-<!-- COUPON POPUP -->
+<!-- COUPON -->
 
 <div id="couponPopup">
 
@@ -729,12 +719,7 @@ You Earned 5 Kiss Coupons 💋🎟️
 </h1>
 
 <img src="./kiss-coupons.png"
-style="
-width:320px;
-margin-top:25px;
-border-radius:25px;
-box-shadow:0 0 35px hotpink;
-">
+style="width:320px; margin-top:25px; border-radius:25px;">
 
 <br>
 
@@ -758,11 +743,82 @@ box-shadow:0 0 35px hotpink;
 
 <!-- PAGE 6 -->
 
-<div class="page" id="pinkBlankPage">
+<div class="page" id="loveLetterPage">
 
-<h1 class="blank-title">
-More Love Coming Tomorrow 💖
+<div class="love-letter-box">
+
+<h1 class="love-title">
+For My Little Mio 💖
 </h1>
+
+<p class="love-paragraph">
+
+Happy Birthday My Little Mio 🎂💖
+
+25 December 2024 se lekar aaj tak humne itna sab kuch dekha hai... police wala scene, family problems, tension, fights... par ek cheez kabhi nahi badli — hum dono 😭❤️
+
+Jab sab against tha tab bhi tu mere sath thi, aur mujhe pata hai future me bhi hum dono hamesha sath rahenge ✨
+
+Tu sirf meri girlfriend nahi hai Mio... tu meri safest place hai 🥺💖
+
+Aur haan... tera Modak tujhe har birthday pe isi tarah special feel karvata rahega 😭🎀
+
+I Love You So Much My Baby Little Mio 💋❤️
+
+</p>
+
+<button id="surpriseBtn">
+🎁 Surprise
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 7 -->
+
+<div class="page" id="secretPlanPage">
+
+<div class="secret-box">
+
+<h1 class="secret-title">
+26•06•2026 ✨
+</h1>
+
+<p class="secret-text">
+
+💌 11:00 AM sharp...  
+Ek special jagah pe koi tumhara wait karega 😭💖
+
+🚉 Hint 1:  
+Journey tracks se shuru hogi...
+
+🛕 Hint 2:  
+Subah blessings lena zaroori hai ✨
+
+🎳 Hint 3:  
+Aaj kisi ki bowling skills expose hone wali hai 😭
+
+📸 Hint 4:  
+Cute photo booth memories incoming 💖
+
+🍴 Hint 5:  
+Aaj calories count nahi hongi baby 😌
+
+🌊 Hint 6:  
+Shaam ka sky, waves aur ek special cake 🎂✨
+
+📍Meeting Point:  
+Vasai Station — Ticket Counter  
+11:00 AM Sharp 💖
+
+</p>
+
+<h2 class="ending-line">
+I Love My Baby Little Mio Purely ❤️
+</h2>
+
+</div>
 
 </div>
 
@@ -783,13 +839,9 @@ heart.classList.add("heart");
 heart.innerHTML="❤️";
 
 heart.style.top=Math.random()*100+"vh";
-
 heart.style.left=Math.random()*100+"vw";
-
 heart.style.animationDuration=(4+Math.random()*5)+"s";
-
 heart.style.animationDelay=Math.random()*5+"s";
-
 heart.style.fontSize=(18+Math.random()*25)+"px";
 
 document.getElementById("heartsContainer").appendChild(heart);
@@ -824,14 +876,13 @@ Math.floor((distance % (1000 * 60)) / 1000);
 
 },1000);
 
-/* OPEN PAGE 2 */
+/* PAGE FLOW */
 
 document.getElementById("openBtn").onclick=()=>{
 
 birthdayMusic.play();
 
 document.getElementById("countdownPage").style.display="none";
-
 document.getElementById("galleryPage").style.display="flex";
 
 setTimeout(()=>{
@@ -842,23 +893,31 @@ document.getElementById("memoryBtn").classList.add("show");
 
 };
 
-/* OPEN RULES */
-
 document.getElementById("memoryBtn").onclick=()=>{
 
 document.getElementById("galleryPage").style.display="none";
-
 document.getElementById("rulesPage").style.display="flex";
 
 };
 
-/* START QUIZ */
-
 document.getElementById("playQuizBtn").onclick=()=>{
 
 document.getElementById("rulesPage").style.display="none";
-
 document.getElementById("quizPage").style.display="flex";
+
+};
+
+document.getElementById("nextBlankPageBtn").onclick=()=>{
+
+document.getElementById("finalLovePage").style.display="none";
+document.getElementById("loveLetterPage").style.display="flex";
+
+};
+
+document.getElementById("surpriseBtn").onclick=()=>{
+
+document.getElementById("loveLetterPage").style.display="none";
+document.getElementById("secretPlanPage").style.display="flex";
 
 };
 
@@ -955,8 +1014,6 @@ btn.innerHTML = q.answers[index];
 
 loadQuestion();
 
-/* CHECK ANSWER */
-
 function checkAnswer(button){
 
 let selected = button.innerHTML;
@@ -977,37 +1034,28 @@ alert("Wrong answer baby 😭💔");
 
 }
 
-document.getElementById("questionCard").style.transform="translateY(-100vh)";
-document.getElementById("questionCard").style.opacity="0";
-
 currentQuestion++;
 
 if(currentQuestion < questions.length){
 
 setTimeout(()=>{
 
-document.getElementById("questionCard").style.transform="translateY(0)";
-document.getElementById("questionCard").style.opacity="1";
-
 loadQuestion();
 
-},1200);
+},1000);
 
 }else{
 
 setTimeout(()=>{
 
 document.getElementById("quizPage").style.display="none";
-
 document.getElementById("finalLovePage").style.display="flex";
 
-},1800);
+},1500);
 
 }
 
 }
-
-/* COUPON POPUP */
 
 function showCoupon(){
 
@@ -1022,16 +1070,6 @@ popup.classList.remove("show");
 },1800);
 
 }
-
-/* LAST PAGE */
-
-document.getElementById("nextBlankPageBtn").onclick=()=>{
-
-document.getElementById("finalLovePage").style.display="none";
-
-document.getElementById("pinkBlankPage").style.display="flex";
-
-};
 
 </script>
 
