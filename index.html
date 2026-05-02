@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mio's Birthday ❤️</title>
+<title>Mio's Birthday 💖</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -40,18 +40,19 @@ overflow:hidden;
 .heart{
 position:absolute;
 font-size:30px;
-animation:float 7s linear infinite;
+animation:floatHeart linear infinite;
 opacity:0.8;
 pointer-events:none;
+z-index:1;
 }
 
-@keyframes float{
+@keyframes floatHeart{
 0%{
 transform:translateY(100vh) scale(0.5);
 opacity:0;
 }
 100%{
-transform:translateY(-120vh) scale(1.2);
+transform:translateY(-120vh) scale(1.3);
 opacity:1;
 }
 }
@@ -65,9 +66,9 @@ text-align:center;
 }
 
 .main-title{
-font-size:70px;
+font-size:68px;
 font-weight:700;
-text-shadow:0 0 20px rgba(255,255,255,0.7);
+text-shadow:0 0 20px rgba(255,255,255,0.8);
 margin-bottom:20px;
 z-index:5;
 }
@@ -96,7 +97,7 @@ display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-box-shadow:0 0 30px rgba(255,255,255,0.4);
+box-shadow:0 0 35px rgba(255,255,255,0.5);
 }
 
 .box h1{
@@ -110,15 +111,15 @@ margin-top:10px;
 
 #openBtn{
 margin-top:50px;
-padding:20px 50px;
+padding:20px 55px;
 border:none;
-border-radius:50px;
+border-radius:60px;
 font-size:24px;
 font-weight:600;
 background:white;
 color:#ff4f81;
 cursor:pointer;
-box-shadow:0 0 30px rgba(255,255,255,0.6);
+box-shadow:0 0 35px rgba(255,255,255,0.7);
 transition:0.4s;
 z-index:5;
 }
@@ -135,16 +136,18 @@ background:black;
 overflow:hidden;
 }
 
+/* TITLE */
+
 .gallery-title{
 position:absolute;
-top:50px;
+top:40px;
 left:50%;
 transform:translateX(-50%);
-font-size:65px;
+font-size:70px;
 font-weight:700;
 color:#ff69b4;
-text-shadow:0 0 25px #ff69b4;
-z-index:10;
+text-shadow:0 0 30px #ff69b4;
+z-index:15;
 text-align:center;
 width:100%;
 }
@@ -153,13 +156,14 @@ width:100%;
 
 .balloon{
 position:absolute;
-bottom:-500px;
+bottom:-450px;
 width:240px;
 height:240px;
-animation:fly linear infinite;
+animation:flyUp linear infinite;
 display:flex;
 justify-content:center;
 align-items:center;
+z-index:10;
 }
 
 .balloon img{
@@ -181,9 +185,9 @@ transform:translateX(-50%);
 font-size:70px;
 }
 
-/* FASTER FLOAT */
+/* FASTER SPEED */
 
-@keyframes fly{
+@keyframes flyUp{
 0%{
 transform:translateY(0);
 }
@@ -196,56 +200,56 @@ transform:translateY(-190vh);
 
 .b1{
 left:2%;
-animation-duration:12s;
+animation-duration:11s;
 }
 
 .b2{
 left:27%;
-animation-duration:14s;
+animation-duration:13s;
 }
 
 .b3{
 left:52%;
-animation-duration:13s;
+animation-duration:12s;
 }
 
 .b4{
-left:76%;
-animation-duration:15s;
+left:77%;
+animation-duration:14s;
 }
 
 /* MEMORY BUTTON */
 
 #memoryBtn{
 position:absolute;
-bottom:-200px;
 left:50%;
 transform:translateX(-50%);
-padding:22px 40px;
-font-size:24px;
-font-weight:600;
+bottom:-200px;
+padding:22px 42px;
 border:none;
 border-radius:60px;
 background:#ff69b4;
 color:white;
-box-shadow:0 0 30px #ff69b4;
+font-size:24px;
+font-weight:600;
 cursor:pointer;
-transition:0.4s;
-z-index:20;
+box-shadow:0 0 30px #ff69b4;
 opacity:0;
+z-index:20;
+transition:0.4s;
 }
 
 #memoryBtn.show{
-animation:riseButton 2s forwards;
+animation:buttonRise 2s forwards;
 }
 
-@keyframes riseButton{
+@keyframes buttonRise{
 0%{
 bottom:-200px;
 opacity:0;
 }
 100%{
-bottom:170px;
+bottom:180px;
 opacity:1;
 }
 }
@@ -259,10 +263,57 @@ transform:translateX(-50%) scale(1.08);
 #testPage{
 display:none;
 background:#ffc0cb;
-color:white;
+justify-content:center;
+align-items:center;
+}
+
+.blankText{
 font-size:70px;
 font-weight:700;
-text-shadow:0 0 25px white;
+color:white;
+text-shadow:0 0 30px white;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+.main-title{
+font-size:42px;
+padding:0 20px;
+}
+
+.gallery-title{
+font-size:48px;
+padding:0 20px;
+}
+
+.box{
+width:120px;
+height:120px;
+}
+
+.box h1{
+font-size:40px;
+}
+
+.balloon{
+width:170px;
+height:170px;
+}
+
+#memoryBtn{
+font-size:18px;
+padding:18px 25px;
+width:85%;
+}
+
+.blankText{
+font-size:42px;
+text-align:center;
+padding:20px;
+}
+
 }
 
 </style>
@@ -272,7 +323,7 @@ text-shadow:0 0 25px white;
 
 <!-- HEARTS -->
 
-<div id="hearts"></div>
+<div id="heartsContainer"></div>
 
 <!-- PAGE 1 -->
 
@@ -289,22 +340,22 @@ Waiting for the most special day ✨
 <div class="countdown">
 
 <div class="box">
-<h1>54</h1>
+<h1 id="days">00</h1>
 <p>Days</p>
 </div>
 
 <div class="box">
-<h1>12</h1>
+<h1 id="hours">00</h1>
 <p>Hours</p>
 </div>
 
 <div class="box">
-<h1>45</h1>
+<h1 id="minutes">00</h1>
 <p>Minutes</p>
 </div>
 
 <div class="box">
-<h1>22</h1>
+<h1 id="seconds">00</h1>
 <p>Seconds</p>
 </div>
 
@@ -321,7 +372,7 @@ Waiting for the most special day ✨
 <div class="page" id="galleryPage">
 
 <h1 class="gallery-title">
-Our Cute Memories ❤️
+Our Cute Memories 💖
 </h1>
 
 <!-- PHOTO 1 -->
@@ -348,8 +399,10 @@ Our Cute Memories ❤️
 <img src="./photo4.jpg.jpg">
 </div>
 
+<!-- BUTTON -->
+
 <button id="memoryBtn">
-🩷 Test Your Muscle Memory Of Love And Bond 🩷
+💖 Test Your Muscle Memory Of Love And Bond 💖
 </button>
 
 </div>
@@ -358,8 +411,8 @@ Our Cute Memories ❤️
 
 <div class="page" id="testPage">
 
-<div>
-Pink Test Page 💖
+<div class="blankText">
+Pink Test Page 💕
 </div>
 
 </div>
@@ -368,7 +421,9 @@ Pink Test Page 💖
 
 /* HEARTS */
 
-for(let i=0;i<120;i++){
+function createHearts(){
+
+for(let i=0;i<160;i++){
 
 let heart=document.createElement("div");
 
@@ -378,13 +433,44 @@ heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
 
-heart.style.animationDuration=(4+Math.random()*6)+"s";
+heart.style.animationDuration=(3+Math.random()*5)+"s";
 
-heart.style.fontSize=(20+Math.random()*30)+"px";
+heart.style.animationDelay=Math.random()*5+"s";
 
-document.getElementById("hearts").appendChild(heart);
+heart.style.fontSize=(18+Math.random()*28)+"px";
+
+document.getElementById("heartsContainer").appendChild(heart);
 
 }
+
+}
+
+createHearts();
+
+/* COUNTDOWN */
+
+const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = targetDate - now;
+
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
+
+},1000);
 
 /* OPEN PAGE 2 */
 
@@ -394,13 +480,13 @@ document.getElementById("countdownPage").style.display="none";
 
 document.getElementById("galleryPage").style.display="flex";
 
-/* BUTTON AFTER PHOTOS GO UP */
+/* BUTTON APPEAR AFTER PHOTOS GO UP */
 
 setTimeout(()=>{
 
 document.getElementById("memoryBtn").classList.add("show");
 
-},5000);
+},4500);
 
 };
 
