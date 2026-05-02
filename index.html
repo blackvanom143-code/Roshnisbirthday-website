@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>For My Love ❤️</title>
+<title>Mio's Birthday ❤️</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -45,9 +45,10 @@ left:0;
 /* TITLE */
 
 h1{
-font-size:70px;
+font-size:65px;
 text-shadow:0 0 20px rgba(255,255,255,0.8);
 z-index:2;
+padding:0 20px;
 }
 
 p{
@@ -91,19 +92,17 @@ font-size:22px;
 background:white;
 color:#ff4d6d;
 font-weight:bold;
-opacity:0.5;
-cursor:not-allowed;
-transition:0.4s;
-}
-
-.unlock-btn.active{
 opacity:1;
 cursor:pointer;
-transform:scale(1.05);
+transition:0.4s;
 box-shadow:0 0 25px pink;
 }
 
-/* HEARTS */
+.unlock-btn:hover{
+transform:scale(1.08);
+}
+
+/* FLOATING HEARTS */
 
 .heart{
 position:absolute;
@@ -139,33 +138,34 @@ overflow:hidden;
 }
 
 .gallery-title{
-margin-top:30px;
+margin-top:40px;
 font-size:55px;
 z-index:10;
+text-shadow:0 0 20px rgba(255,255,255,0.8);
 }
 
 /* PHOTO BALLOONS */
 
 .balloon{
 position:absolute;
-bottom:-350px;
+bottom:-450px;
 width:220px;
 animation:rise linear infinite;
 }
 
 .balloon img{
 width:100%;
-height:300px;
+height:320px;
 object-fit:cover;
 border-radius:30px;
 border:6px solid white;
-box-shadow:0 0 25px rgba(255,255,255,0.5);
+box-shadow:0 0 30px rgba(255,255,255,0.6);
 }
 
 .balloon::before{
 content:"❤️";
 position:absolute;
-top:-60px;
+top:-65px;
 left:50%;
 transform:translateX(-50%);
 font-size:60px;
@@ -178,7 +178,42 @@ transform:translateY(0);
 }
 
 100%{
-transform:translateY(-150vh);
+transform:translateY(-170vh);
+}
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+h1{
+font-size:42px;
+}
+
+p{
+font-size:18px;
+}
+
+.box{
+width:110px;
+padding:18px;
+}
+
+.box h2{
+font-size:38px;
+}
+
+.gallery-title{
+font-size:38px;
+}
+
+.balloon{
+width:150px;
+}
+
+.balloon img{
+height:230px;
 }
 
 }
@@ -192,7 +227,7 @@ transform:translateY(-150vh);
 
 <div class="page" id="countdownPage">
 
-<h1>Her Birthday Countdown ❤️</h1>
+<h1>Mio's Its Your Birthday ❤️</h1>
 
 <p>Waiting for the most special day ✨</p>
 
@@ -221,7 +256,7 @@ transform:translateY(-150vh);
 </div>
 
 <button class="unlock-btn" id="unlockBtn">
-🔒 Locked Until Birthday
+❤️ Open Surprise ❤️
 </button>
 
 </div>
@@ -236,37 +271,37 @@ Our Cute Memories ❤️
 
 <!-- PHOTO 1 -->
 
-<div class="balloon" style="left:5%;animation-duration:18s;">
-<img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?q=80&w=1000&auto=format&fit=crop">
+<div class="balloon" style="left:2%;animation-duration:18s;">
+<img src="photo1.jpg">
 </div>
 
 <!-- PHOTO 2 -->
 
-<div class="balloon" style="left:28%;animation-duration:22s;">
-<img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1000&auto=format&fit=crop">
+<div class="balloon" style="left:26%;animation-duration:22s;">
+<img src="photo2.jpg">
 </div>
 
 <!-- PHOTO 3 -->
 
 <div class="balloon" style="left:52%;animation-duration:20s;">
-<img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=1000&auto=format&fit=crop">
+<img src="photo3.jpg">
 </div>
 
 <!-- PHOTO 4 -->
 
-<div class="balloon" style="left:75%;animation-duration:24s;">
-<img src="https://images.unsplash.com/photo-1511988617509-a57c8a288659?q=80&w=1000&auto=format&fit=crop">
+<div class="balloon" style="left:76%;animation-duration:24s;">
+<img src="photo4.jpg">
 </div>
 
 </div>
 
 <script>
 
-/* COUNTDOWN */
+/* TESTING MODE */
+
 const targetDate = new Date("May 1, 2025 00:00:00").getTime();
 
-
-const unlockBtn = document.getElementById("unlockBtn");
+/* COUNTDOWN */
 
 setInterval(()=>{
 
@@ -290,33 +325,15 @@ document.getElementById("minutes").innerHTML = minutes;
 
 document.getElementById("seconds").innerHTML = seconds;
 
-/* BUTTON UNLOCK */
-
-if(distance <= 0){
-
-unlockBtn.innerHTML = "❤️ Open Surprise ❤️";
-
-unlockBtn.classList.add("active");
-
-unlockBtn.disabled = false;
-
-}
-
 },1000);
 
 /* BUTTON CLICK */
 
-unlockBtn.addEventListener("click",()=>{
-
-const now = new Date().getTime();
-
-if(now >= targetDate){
+document.getElementById("unlockBtn").addEventListener("click",()=>{
 
 document.getElementById("countdownPage").style.display="none";
 
 document.getElementById("galleryPage").style.display="flex";
-
-}
 
 });
 
