@@ -1,120 +1,272 @@
-```html
-<!-- ========================================= -->
-<!-- REPLACE ONLY THIS PART IN YOUR CODE 💖 -->
-<!-- ========================================= -->
+```html id="complete-love-website"
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- DELETE THIS OLD PAGE -->
+<title>Mio's Birthday 💖</title>
 
-<!--
-<div class="page" id="testPage">
-
-<div class="blankText">
-Pink Test Page 💕
-</div>
-
-</div>
--->
-
-<!-- ========================================= -->
-<!-- NEW LOVE BOND QUIZ PAGE 💖 -->
-<!-- ========================================= -->
-
-<div class="page" id="quizPage" style="display:none; background:#ffc7d8;">
-
-<div class="quiz-container">
-
-<h1 class="quiz-title">
-Test Your Muscle Memory Of Love & Bond 💖
-</h1>
-
-<div class="kiss-counter">
-💋 Kiss Coupons Earned:
-<span id="kissCount">0</span>/5
-</div>
-
-<div class="question-card">
-
-<h2 id="questionText">
-Loading Question...
-</h2>
-
-<div class="answers">
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 1
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 2
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 3
-</button>
-
-<button class="answer-btn" onclick="checkAnswer(this)">
-Option 4
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<!-- ========================================= -->
-<!-- COUPON POPUP 💖 -->
-<!-- ========================================= -->
-
-<div id="couponPopup">
-
-<div class="coupon-card">
-
-<div class="coupon-left">
-ONE KISS
-</div>
-
-<div class="coupon-right">
-COUPON
-</div>
-
-</div>
-
-<p class="coupon-text">
-Correct Answer Baby 😭💖
-</p>
-
-</div>
-
-<!-- ========================================= -->
-<!-- FINAL PAGE 💖 -->
-<!-- ========================================= -->
-
-<div class="page" id="finalLovePage" style="display:none; background:#ffbfd1;">
-
-<div class="final-box">
-
-<h1>
-You Earned 5 Kiss Coupons 💋🎟️
-</h1>
-
-<p>
-Certified Love Champion 😭💖
-</p>
-
-</div>
-
-</div>
-
-<!-- ========================================= -->
-<!-- ADD THIS CSS ABOVE </style> 💖 -->
-<!-- ========================================= -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+overflow:hidden;
+background:#ffc0cb;
+}
+
+/* PAGES */
+
+.page{
+position:absolute;
+width:100%;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+overflow:hidden;
+}
+
+/* HEARTS */
+
+.heart{
+position:absolute;
+font-size:30px;
+animation:floatHeart linear infinite;
+opacity:0.8;
+pointer-events:none;
+z-index:1;
+}
+
+@keyframes floatHeart{
+
+0%{
+transform:translateY(120vh) scale(0.5);
+opacity:0;
+}
+
+100%{
+transform:translateY(-140vh) scale(1.2);
+opacity:1;
+}
+
+}
+
+/* PAGE 1 */
+
+#countdownPage{
+background:#ffc0cb;
+color:white;
+text-align:center;
+}
+
+.main-title{
+font-size:68px;
+font-weight:700;
+text-shadow:0 0 20px rgba(255,255,255,0.8);
+margin-bottom:20px;
+z-index:5;
+}
+
+.subtitle{
+font-size:24px;
+margin-bottom:40px;
+z-index:5;
+}
+
+.countdown{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+z-index:5;
+}
+
+.box{
+width:150px;
+height:150px;
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(10px);
+border-radius:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+}
+
+.box h1{
+font-size:55px;
+}
+
+.box p{
+font-size:20px;
+margin-top:10px;
+}
+
+#openBtn{
+margin-top:50px;
+padding:20px 55px;
+border:none;
+border-radius:60px;
+font-size:24px;
+font-weight:600;
+background:white;
+color:#ff4f81;
+cursor:pointer;
+box-shadow:0 0 35px rgba(255,255,255,0.7);
+transition:0.4s;
+z-index:5;
+}
+
+#openBtn:hover{
+transform:scale(1.08);
+}
+
+/* PAGE 2 */
+
+#galleryPage{
+display:none;
+background:black;
+overflow:hidden;
+}
+
+.gallery-title{
+position:absolute;
+top:45px;
+left:50%;
+transform:translateX(-50%);
+font-size:70px;
+font-weight:700;
+color:#ff69b4;
+text-shadow:0 0 30px #ff69b4;
+z-index:15;
+text-align:center;
+width:100%;
+}
+
+/* BALLOONS */
+
+.balloon{
+position:absolute;
+bottom:-450px;
+width:240px;
+height:240px;
+animation:flyUp linear infinite;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:10;
+}
+
+.balloon img{
+width:100%;
+height:100%;
+object-fit:contain;
+background:black;
+border-radius:35px;
+border:6px solid white;
+box-shadow:0 0 35px white;
+}
+
+.balloon::before{
+content:"🎈";
+position:absolute;
+top:-70px;
+left:50%;
+transform:translateX(-50%);
+font-size:70px;
+}
+
+@keyframes flyUp{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(-190vh);
+}
+
+}
+
+.b1{
+left:2%;
+animation-duration:11s;
+}
+
+.b2{
+left:27%;
+animation-duration:13s;
+}
+
+.b3{
+left:52%;
+animation-duration:12s;
+}
+
+.b4{
+left:77%;
+animation-duration:14s;
+}
+
+/* MEMORY BUTTON */
+
+#memoryBtn{
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+bottom:-200px;
+padding:22px 42px;
+border:none;
+border-radius:60px;
+background:#ff69b4;
+color:white;
+font-size:24px;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 0 30px #ff69b4;
+opacity:0;
+z-index:20;
+transition:0.4s;
+}
+
+#memoryBtn.show{
+animation:buttonRise 2s forwards;
+}
+
+@keyframes buttonRise{
+
+0%{
+bottom:-200px;
+opacity:0;
+}
+
+100%{
+bottom:180px;
+opacity:1;
+}
+
+}
+
+#memoryBtn:hover{
+transform:translateX(-50%) scale(1.08);
+}
+
+/* QUIZ PAGE */
+
 #quizPage{
+display:none;
+background:#ffc7d8;
 justify-content:center;
 align-items:center;
 padding:40px;
@@ -125,6 +277,7 @@ overflow:hidden;
 width:100%;
 max-width:700px;
 text-align:center;
+z-index:10;
 }
 
 .quiz-title{
@@ -179,6 +332,8 @@ background:#ff2e74;
 color:white;
 }
 
+/* COUPON */
+
 #couponPopup{
 position:fixed;
 top:50%;
@@ -232,6 +387,15 @@ font-size:28px;
 text-shadow:0 0 15px hotpink;
 }
 
+/* FINAL PAGE */
+
+#finalLovePage{
+display:none;
+background:#ffbfd1;
+justify-content:center;
+align-items:center;
+}
+
 .final-box{
 text-align:center;
 }
@@ -248,27 +412,315 @@ color:#ff2e74;
 margin-top:20px;
 }
 
+/* MOBILE */
+
+@media(max-width:768px){
+
+.main-title{
+font-size:42px;
+padding:0 20px;
+}
+
+.gallery-title{
+font-size:48px;
+padding:0 20px;
+}
+
+.box{
+width:120px;
+height:120px;
+}
+
+.box h1{
+font-size:40px;
+}
+
+.balloon{
+width:170px;
+height:170px;
+}
+
+#memoryBtn{
+font-size:18px;
+padding:18px 25px;
+width:85%;
+}
+
+.quiz-title{
+font-size:38px;
+}
+
+.question-card h2{
+font-size:25px;
+}
+
+.answers{
+grid-template-columns:1fr;
+}
+
+.answer-btn{
+font-size:18px;
+}
+
+.final-box h1{
+font-size:42px;
+padding:20px;
+}
+
+}
+
 </style>
+</head>
 
-<!-- ========================================= -->
-<!-- REPLACE THIS OLD SCRIPT 💖 -->
-<!-- ========================================= -->
+<body>
 
-<!-- DELETE THIS -->
+<!-- MUSIC -->
 
-<!--
-document.getElementById("memoryBtn").onclick=()=>{
+<audio id="birthdayMusic" loop>
+<source src="music.mp3.mp3" type="audio/mp3">
+</audio>
 
-document.getElementById("galleryPage").style.display="none";
+<!-- HEARTS -->
 
-document.getElementById("testPage").style.display="flex";
+<div id="heartsContainer"></div>
 
-};
--->
+<!-- PAGE 1 -->
 
-<!-- ADD THIS NEW SCRIPT -->
+<div class="page" id="countdownPage">
+
+<h1 class="main-title">
+Mio's Its Your Birthday ❤️
+</h1>
+
+<p class="subtitle">
+Waiting for the most special day ✨
+</p>
+
+<div class="countdown">
+
+<div class="box">
+<h1 id="days">00</h1>
+<p>Days</p>
+</div>
+
+<div class="box">
+<h1 id="hours">00</h1>
+<p>Hours</p>
+</div>
+
+<div class="box">
+<h1 id="minutes">00</h1>
+<p>Minutes</p>
+</div>
+
+<div class="box">
+<h1 id="seconds">00</h1>
+<p>Seconds</p>
+</div>
+
+</div>
+
+<button id="openBtn">
+🎁 Open Surprise 🎁
+</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page" id="galleryPage">
+
+<h1 class="gallery-title">
+Our Cute Memories 💖
+</h1>
+
+<div class="balloon b1">
+<img src="./photo1.jpg.jpg">
+</div>
+
+<div class="balloon b2">
+<img src="./photo2.jpg.jpg">
+</div>
+
+<div class="balloon b3">
+<img src="./photo3.jpg.jpg">
+</div>
+
+<div class="balloon b4">
+<img src="./photo4.jpg.jpg">
+</div>
+
+<button id="memoryBtn">
+💖 Test Your Muscle Memory Of Love And Bond 💖
+</button>
+
+</div>
+
+<!-- PAGE 3 QUIZ -->
+
+<div class="page" id="quizPage">
+
+<div class="quiz-container">
+
+<h1 class="quiz-title">
+Test Your Muscle Memory Of Love & Bond 💖
+</h1>
+
+<div class="kiss-counter">
+💋 Kiss Coupons Earned:
+<span id="kissCount">0</span>/5
+</div>
+
+<div class="question-card">
+
+<h2 id="questionText">
+Loading Question...
+</h2>
+
+<div class="answers">
+
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 1
+</button>
+
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 2
+</button>
+
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 3
+</button>
+
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 4
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COUPON POPUP -->
+
+<div id="couponPopup">
+
+<div class="coupon-card">
+
+<div class="coupon-left">
+ONE KISS
+</div>
+
+<div class="coupon-right">
+COUPON
+</div>
+
+</div>
+
+<p class="coupon-text">
+Correct Answer Baby 😭💖
+</p>
+
+</div>
+
+<!-- FINAL PAGE -->
+
+<div class="page" id="finalLovePage">
+
+<div class="final-box">
+
+<h1>
+You Earned 5 Kiss Coupons 💋🎟️
+</h1>
+
+<p>
+Certified Love Champion 😭💖
+</p>
+
+</div>
+
+</div>
 
 <script>
+
+const birthdayMusic = document.getElementById("birthdayMusic");
+
+/* HEARTS */
+
+function createHearts(){
+
+for(let i=0;i<90;i++){
+
+let heart=document.createElement("div");
+
+heart.classList.add("heart");
+
+heart.innerHTML="❤️";
+
+heart.style.top=Math.random()*100+"vh";
+
+heart.style.left=Math.random()*100+"vw";
+
+heart.style.animationDuration=(4+Math.random()*5)+"s";
+
+heart.style.animationDelay=Math.random()*5+"s";
+
+heart.style.fontSize=(18+Math.random()*25)+"px";
+
+document.getElementById("heartsContainer").appendChild(heart);
+
+}
+
+}
+
+createHearts();
+
+/* COUNTDOWN */
+
+const targetDate = new Date("June 26, 2026 00:00:00").getTime();
+
+setInterval(()=>{
+
+const now = new Date().getTime();
+
+const distance = targetDate - now;
+
+const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+
+const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+
+const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+document.getElementById("days").innerHTML = days;
+document.getElementById("hours").innerHTML = hours;
+document.getElementById("minutes").innerHTML = minutes;
+document.getElementById("seconds").innerHTML = seconds;
+
+},1000);
+
+/* OPEN PAGE 2 */
+
+document.getElementById("openBtn").onclick=()=>{
+
+birthdayMusic.play();
+
+document.getElementById("countdownPage").style.display="none";
+
+document.getElementById("galleryPage").style.display="flex";
+
+setTimeout(()=>{
+
+document.getElementById("memoryBtn").classList.add("show");
+
+},4500);
+
+};
+
+/* OPEN QUIZ */
 
 document.getElementById("memoryBtn").onclick=()=>{
 
@@ -430,4 +882,7 @@ popup.classList.remove("show");
 }
 
 </script>
+
+</body>
+</html>
 ```
