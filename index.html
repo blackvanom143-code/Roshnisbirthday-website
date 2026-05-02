@@ -48,11 +48,11 @@ z-index:1;
 
 @keyframes floatHeart{
 0%{
-transform:translateY(100vh) scale(0.5);
+transform:translateY(120vh) scale(0.5);
 opacity:0;
 }
 100%{
-transform:translateY(-120vh) scale(1.3);
+transform:translateY(-140vh) scale(1.2);
 opacity:1;
 }
 }
@@ -140,7 +140,7 @@ overflow:hidden;
 
 .gallery-title{
 position:absolute;
-top:40px;
+top:45px;
 left:50%;
 transform:translateX(-50%);
 font-size:70px;
@@ -185,7 +185,7 @@ transform:translateX(-50%);
 font-size:70px;
 }
 
-/* FASTER SPEED */
+/* FASTER FLOAT */
 
 @keyframes flyUp{
 0%{
@@ -218,7 +218,7 @@ left:77%;
 animation-duration:14s;
 }
 
-/* MEMORY BUTTON */
+/* BUTTON */
 
 #memoryBtn{
 position:absolute;
@@ -423,7 +423,7 @@ Pink Test Page 💕
 
 function createHearts(){
 
-for(let i=0;i<160;i++){
+for(let i=0;i<90;i++){
 
 let heart=document.createElement("div");
 
@@ -431,13 +431,15 @@ heart.classList.add("heart");
 
 heart.innerHTML="❤️";
 
+heart.style.top=Math.random()*100+"vh";
+
 heart.style.left=Math.random()*100+"vw";
 
-heart.style.animationDuration=(3+Math.random()*5)+"s";
+heart.style.animationDuration=(4+Math.random()*5)+"s";
 
 heart.style.animationDelay=Math.random()*5+"s";
 
-heart.style.fontSize=(18+Math.random()*28)+"px";
+heart.style.fontSize=(18+Math.random()*25)+"px";
 
 document.getElementById("heartsContainer").appendChild(heart);
 
@@ -480,7 +482,7 @@ document.getElementById("countdownPage").style.display="none";
 
 document.getElementById("galleryPage").style.display="flex";
 
-/* BUTTON APPEAR AFTER PHOTOS GO UP */
+/* BUTTON AFTER PHOTOS GO UP */
 
 setTimeout(()=>{
 
