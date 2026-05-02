@@ -1,4 +1,4 @@
-
+```html id="full-final-birthday-website-code"
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,7 +38,7 @@ flex-direction:column;
 overflow:hidden;
 }
 
-/* FLOATING HEARTS */
+/* HEARTS */
 
 .heart{
 position:absolute;
@@ -256,10 +256,6 @@ opacity:1;
 
 }
 
-#memoryBtn:hover{
-transform:translateX(-50%) scale(1.08);
-}
-
 /* RULES PAGE */
 
 #rulesPage{
@@ -302,7 +298,6 @@ color:white;
 font-size:22px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:0 0 25px hotpink;
 }
 
 /* QUIZ PAGE */
@@ -331,7 +326,6 @@ backdrop-filter:blur(10px);
 padding:45px;
 border-radius:35px;
 box-shadow:0 0 35px rgba(255,255,255,0.5);
-transition:1s;
 }
 
 .question-card h2{
@@ -381,7 +375,6 @@ border:6px solid #444;
 border-radius:20px;
 display:flex;
 overflow:hidden;
-box-shadow:0 0 40px hotpink;
 }
 
 .coupon-left{
@@ -408,7 +401,6 @@ font-weight:bold;
 margin-top:20px;
 font-size:28px;
 color:white;
-text-shadow:0 0 15px hotpink;
 }
 
 /* FINAL PAGE */
@@ -425,7 +417,6 @@ text-align:center;
 .final-box h1{
 font-size:60px;
 color:white;
-text-shadow:0 0 25px hotpink;
 }
 
 .downloadBtn,
@@ -440,7 +431,6 @@ color:white;
 font-size:22px;
 font-weight:bold;
 cursor:pointer;
-box-shadow:0 0 25px hotpink;
 }
 
 /* LOVE LETTER PAGE */
@@ -456,17 +446,14 @@ overflow:auto;
 width:90%;
 max-width:850px;
 background:rgba(255,255,255,0.25);
-backdrop-filter:blur(12px);
 padding:45px;
 border-radius:35px;
-box-shadow:0 0 35px rgba(255,255,255,0.5);
 text-align:center;
 }
 
 .love-title{
 font-size:58px;
 color:white;
-text-shadow:0 0 20px hotpink;
 margin-bottom:30px;
 }
 
@@ -489,17 +476,14 @@ overflow:auto;
 width:90%;
 max-width:850px;
 background:rgba(255,255,255,0.25);
-backdrop-filter:blur(12px);
 padding:45px;
 border-radius:35px;
-box-shadow:0 0 35px rgba(255,255,255,0.5);
 text-align:center;
 }
 
 .secret-title{
 font-size:70px;
 color:white;
-text-shadow:0 0 20px hotpink;
 margin-bottom:30px;
 }
 
@@ -513,31 +497,6 @@ color:white;
 margin-top:35px;
 font-size:40px;
 color:#ff2e74;
-}
-
-/* MOBILE */
-
-@media(max-width:768px){
-
-.main-title{
-font-size:42px;
-padding:0 20px;
-}
-
-.gallery-title{
-font-size:48px;
-padding:0 20px;
-}
-
-.answers{
-grid-template-columns:1fr;
-}
-
-.love-paragraph,
-.secret-text{
-font-size:18px;
-}
-
 }
 
 </style>
@@ -663,7 +622,7 @@ Love Bond Rules 💖
 <span id="kissCount">0</span>/5
 </div>
 
-<div class="question-card" id="questionCard">
+<div class="question-card">
 
 <h2 id="questionText">
 Loading Question...
@@ -702,8 +661,6 @@ COUPON
 
 <p class="coupon-text">
 Congrats Baby Mio 😭💖
-<br>
-You Won A Kissing Coupon 💋🎟️
 </p>
 
 </div>
@@ -719,7 +676,7 @@ You Earned 5 Kiss Coupons 💋🎟️
 </h1>
 
 <img src="./kiss-coupons.png"
-style="width:320px; margin-top:25px; border-radius:25px;">
+style="width:320px; margin-top:25px;">
 
 <br>
 
@@ -788,29 +745,30 @@ I Love You So Much My Baby Little Mio 💋❤️
 <p class="secret-text">
 
 💌 11:00 AM sharp...  
-Ek special jagah pe koi tumhara wait karega 😭💖
+Vasai Station Ticketcounter 
 
-🚉 Hint 1:  
-Journey tracks se shuru hogi...
+🫶 Hint 1:   
+Din ki beginning thodi peaceful aur silent hogi 💖
 
-🛕 Hint 2:  
-Subah blessings lena zaroori hai ✨
+🎳 Hint 2:   
+Aaj koi jeetega bhi... aur koi embarrass bhi hoga 😭
 
-🎳 Hint 3:  
-Aaj kisi ki bowling skills expose hone wali hai 😭
+📸 Hint 3:   
+Aaj kuch memories sirf phone gallery ke liye nahi hongi ✨
 
-📸 Hint 4:  
-Cute photo booth memories incoming 💖
+🍴 Hint 4:   
+Aaj “kya khana hai?” ka answer important nahi hoga 😌
 
-🍴 Hint 5:  
-Aaj calories count nahi hongi baby 😌
+🌅 Hint 5:   
+Din khatam hone se pehle ek moment sabse zyada yaad rehega 🎂💖
 
-🌊 Hint 6:  
-Shaam ka sky, waves aur ek special cake 🎂✨
+🎁 Hint 6:   
+Aaj ka pura plan kisi aur ko nahi pata... sirf ek Modak ko 😭✨
 
-📍Meeting Point:  
-Vasai Station — Ticket Counter  
-11:00 AM Sharp 💖
+📍Final Hint:  
+Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
+
+⏰ Sharp 11:00 AM 💖
 
 </p>
 
@@ -824,9 +782,7 @@ I Love My Baby Little Mio Purely ❤️
 
 <script>
 
-const birthdayMusic = document.getElementById("birthdayMusic");
-
-/* HEARTS */
+const birthdayMusic=document.getElementById("birthdayMusic");
 
 function createHearts(){
 
@@ -841,8 +797,6 @@ heart.innerHTML="❤️";
 heart.style.top=Math.random()*100+"vh";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(4+Math.random()*5)+"s";
-heart.style.animationDelay=Math.random()*5+"s";
-heart.style.fontSize=(18+Math.random()*25)+"px";
 
 document.getElementById("heartsContainer").appendChild(heart);
 
@@ -851,8 +805,6 @@ document.getElementById("heartsContainer").appendChild(heart);
 }
 
 createHearts();
-
-/* COUNTDOWN */
 
 const targetDate = new Date("June 26, 2026 00:00:00").getTime();
 
@@ -876,7 +828,7 @@ Math.floor((distance % (1000 * 60)) / 1000);
 
 },1000);
 
-/* PAGE FLOW */
+/* FLOW */
 
 document.getElementById("openBtn").onclick=()=>{
 
@@ -923,90 +875,80 @@ document.getElementById("secretPlanPage").style.display="flex";
 
 /* QUESTIONS */
 
-const questions = [
+const questions=[
 
 {
 question:"What is our password? 💖",
-
 answers:[
 "YUDKBH + Hot Chocolate",
 "Chocolate + Love",
 "Modak123",
 "Forever Us"
 ],
-
 correct:"YUDKBH + Hot Chocolate"
 },
 
 {
 question:"The night it all began? ✨",
-
 answers:[
 "25/12/2024",
 "01/01/2025",
 "14/02/2025",
 "10/12/2024"
 ],
-
 correct:"25/12/2024"
 },
 
 {
 question:"Where was our first kiss? 😭💋",
-
 answers:[
 "ISKON",
 "Chulna Talav",
 "College",
 "Cafe"
 ],
-
 correct:"Chulna Talav"
 },
 
 {
 question:"Where was Modak's first birthday place? 🎂",
-
 answers:[
 "ISKON",
 "Temple",
 "Cafe",
 "Resort"
 ],
-
 correct:"ISKON"
 },
 
 {
 question:"What was the first gift given by Modak? 🎁",
-
 answers:[
 "Ring",
 "Chocolate",
 "Anklet",
 "Teddy"
 ],
-
 correct:"Anklet"
 }
 
 ];
 
-let currentQuestion = 0;
-let score = 0;
+let currentQuestion=0;
+let score=0;
 
-const questionText = document.getElementById("questionText");
-const buttons = document.querySelectorAll(".answer-btn");
+const questionText=document.getElementById("questionText");
+const buttons=document.querySelectorAll(".answer-btn");
 
 function loadQuestion(){
 
-let q = questions[currentQuestion];
+let q=questions[currentQuestion];
 
-questionText.innerHTML = q.question;
+questionText.innerHTML=q.question;
 
 buttons.forEach((btn,index)=>{
 
-btn.innerHTML = q.answers[index];
+btn.innerHTML=q.answers[index];
 
 });
 
@@ -1016,15 +958,15 @@ loadQuestion();
 
 function checkAnswer(button){
 
-let selected = button.innerHTML;
+let selected=button.innerHTML;
 
-let correct = questions[currentQuestion].correct;
+let correct=questions[currentQuestion].correct;
 
-if(selected === correct){
+if(selected===correct){
 
 score++;
 
-document.getElementById("kissCount").innerHTML = score;
+document.getElementById("kissCount").innerHTML=score;
 
 showCoupon();
 
@@ -1036,7 +978,7 @@ alert("Wrong answer baby 😭💔");
 
 currentQuestion++;
 
-if(currentQuestion < questions.length){
+if(currentQuestion<questions.length){
 
 setTimeout(()=>{
 
