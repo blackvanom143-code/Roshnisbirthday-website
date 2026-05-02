@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -357,8 +358,6 @@ font-size:40px;
 color:#ff2e74;
 }
 
-/* MOBILE */
-
 @media(max-width:768px){
 
 .main-title{
@@ -710,9 +709,42 @@ This website will unlock on:
 26 • 06 • 2026 😭✨
 </p>
 
+<div id="lockCountdown"
+style="
+margin-top:35px;
+font-size:34px;
+font-weight:bold;
+color:#ff2e74;
+">
+Loading...
+</div>
+
 </div>
 
 `;
+
+setInterval(()=>{
+
+const current = new Date().getTime();
+
+const distance = unlockDate - current;
+
+const days = Math.floor(distance / (1000*60*60*24));
+
+const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+
+const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+
+const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+document.getElementById("lockCountdown").innerHTML =
+
+days + "d : " +
+hours + "h : " +
+minutes + "m : " +
+seconds + "s";
+
+},1000);
 
 throw new Error("Website Locked");
 
@@ -722,241 +754,9 @@ throw new Error("Website Locked");
 
 checkWebsiteLock();
 
-/* HEARTS */
-
-function createHearts(){
-
-for(let i=0;i<90;i++){
-
-let heart=document.createElement("div");
-
-heart.classList.add("heart");
-
-heart.innerHTML="❤️";
-
-heart.style.top=Math.random()*100+"vh";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(4+Math.random()*5)+"s";
-
-document.getElementById("heartsContainer").appendChild(heart);
-
-}
-
-}
-
-createHearts();
-
-/* COUNTDOWN */
-
-const targetDate = new Date("June 26, 2026 00:00:00").getTime();
-
-setInterval(()=>{
-
-const now = new Date().getTime();
-
-const distance = targetDate - now;
-
-document.getElementById("days").innerHTML =
-Math.floor(distance / (1000 * 60 * 60 * 24));
-
-document.getElementById("hours").innerHTML =
-Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
-document.getElementById("minutes").innerHTML =
-Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-document.getElementById("seconds").innerHTML =
-Math.floor((distance % (1000 * 60)) / 1000);
-
-},1000);
-
-/* FLOW */
-
-document.getElementById("openBtn").onclick=()=>{
-
-document.getElementById("birthdayMusic").play();
-
-document.getElementById("countdownPage").style.display="none";
-
-document.getElementById("galleryPage").style.display="flex";
-
-};
-
-document.getElementById("memoryBtn").onclick=()=>{
-
-document.getElementById("galleryPage").style.display="none";
-
-document.getElementById("rulesPage").style.display="flex";
-
-};
-
-document.getElementById("playQuizBtn").onclick=()=>{
-
-document.getElementById("rulesPage").style.display="none";
-
-document.getElementById("quizPage").style.display="flex";
-
-};
-
-document.getElementById("nextBlankPageBtn").onclick=()=>{
-
-document.getElementById("finalLovePage").style.display="none";
-
-document.getElementById("loveLetterPage").style.display="flex";
-
-};
-
-document.getElementById("surpriseBtn").onclick=()=>{
-
-document.getElementById("loveLetterPage").style.display="none";
-
-document.getElementById("secretPlanPage").style.display="flex";
-
-};
-
-/* QUESTIONS */
-
-const questions=[
-
-{
-question:"What is our password? 💖",
-answers:[
-"YUDKBH + Hot Chocolate",
-"Chocolate + Love",
-"Modak123",
-"Forever Us"
-],
-correct:"YUDKBH + Hot Chocolate"
-},
-
-{
-question:"The night it all began? ✨",
-answers:[
-"25/12/2024",
-"01/01/2025",
-"14/02/2025",
-"10/12/2024"
-],
-correct:"25/12/2024"
-},
-
-{
-question:"Where was our first kiss? 😭💋",
-answers:[
-"ISKON",
-"Chulna Talav",
-"College",
-"Cafe"
-],
-correct:"Chulna Talav"
-},
-
-{
-question:"Where was Modak's first birthday place? 🎂",
-answers:[
-"ISKON",
-"Temple",
-"Cafe",
-"Resort"
-],
-correct:"ISKON"
-},
-
-{
-question:"What was the first gift given by Modak? 🎁",
-answers:[
-"Ring",
-"Chocolate",
-"Anklet",
-"Teddy"
-],
-correct:"Anklet"
-}
-
-];
-
-let currentQuestion=0;
-let score=0;
-
-const questionText=document.getElementById("questionText");
-const buttons=document.querySelectorAll(".answer-btn");
-
-function loadQuestion(){
-
-let q=questions[currentQuestion];
-
-questionText.innerHTML=q.question;
-
-buttons.forEach((btn,index)=>{
-
-btn.innerHTML=q.answers[index];
-
-});
-
-}
-
-loadQuestion();
-
-function checkAnswer(button){
-
-let selected=button.innerHTML;
-
-let correct=questions[currentQuestion].correct;
-
-if(selected===correct){
-
-score++;
-
-document.getElementById("kissCount").innerHTML=score;
-
-showCoupon();
-
-}else{
-
-alert("Wrong answer baby 😭💔");
-
-}
-
-currentQuestion++;
-
-if(currentQuestion<questions.length){
-
-setTimeout(()=>{
-
-loadQuestion();
-
-},1000);
-
-}else{
-
-setTimeout(()=>{
-
-document.getElementById("quizPage").style.display="none";
-
-document.getElementById("finalLovePage").style.display="flex";
-
-},1500);
-
-}
-
-}
-
-function showCoupon(){
-
-let popup=document.getElementById("couponPopup");
-
-popup.classList.add("show");
-
-setTimeout(()=>{
-
-popup.classList.remove("show");
-
-},1800);
-
-}
-
 </script>
 
 </body>
 </html>
 ```
+
