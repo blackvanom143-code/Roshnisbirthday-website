@@ -22,14 +22,12 @@ overflow:hidden;
 background:#ffc0cb;
 }
 
-/* PAGES */
+/* PAGE */
 
 .page{
 position:absolute;
 width:100%;
 height:100vh;
-top:0;
-left:0;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -42,11 +40,11 @@ overflow:hidden;
 .heart{
 position:absolute;
 font-size:30px;
-animation:hearts 10s linear infinite;
+animation:float 10s linear infinite;
 opacity:0.8;
 }
 
-@keyframes hearts{
+@keyframes float{
 0%{
 transform:translateY(100vh) scale(0.5);
 opacity:0;
@@ -57,7 +55,7 @@ opacity:1;
 }
 }
 
-/* PAGE 1 */
+/* FIRST PAGE */
 
 #countdownPage{
 background:#ffc0cb;
@@ -68,7 +66,7 @@ text-align:center;
 .main-title{
 font-size:70px;
 font-weight:700;
-text-shadow:0 0 20px rgba(255,255,255,0.8);
+text-shadow:0 0 20px rgba(255,255,255,0.7);
 margin-bottom:20px;
 z-index:5;
 }
@@ -118,10 +116,14 @@ font-size:24px;
 font-weight:600;
 background:white;
 color:#ff4f81;
-cursor:not-allowed;
-opacity:0.5;
+cursor:pointer;
 box-shadow:0 0 30px rgba(255,255,255,0.6);
+transition:0.4s;
 z-index:5;
+}
+
+#openBtn:hover{
+transform:scale(1.08);
 }
 
 /* PAGE 2 */
@@ -142,7 +144,7 @@ text-shadow:0 0 25px white;
 z-index:5;
 }
 
-/* BALLOON */
+/* BALLOONS */
 
 .balloon{
 position:absolute;
@@ -189,8 +191,6 @@ transform:translateY(-180vh);
 }
 }
 
-/* POSITIONS */
-
 .b1{
 left:2%;
 animation-duration:18s;
@@ -235,29 +235,29 @@ Waiting for the most special day ✨
 <div class="countdown">
 
 <div class="box">
-<h1 id="days">00</h1>
+<h1>54</h1>
 <p>Days</p>
 </div>
 
 <div class="box">
-<h1 id="hours">00</h1>
+<h1>12</h1>
 <p>Hours</p>
 </div>
 
 <div class="box">
-<h1 id="minutes">00</h1>
+<h1>45</h1>
 <p>Minutes</p>
 </div>
 
 <div class="box">
-<h1 id="seconds">00</h1>
+<h1>22</h1>
 <p>Seconds</p>
 </div>
 
 </div>
 
 <button id="openBtn">
-🔒 Locked Until Birthday
+🎁 Open Surprise 🎁
 </button>
 
 </div>
@@ -270,25 +270,17 @@ Waiting for the most special day ✨
 Our Cute Memories ❤️
 </h1>
 
-<!-- PHOTO 1 -->
-
 <div class="balloon b1">
 <img src="./photo1.jpg.jpg">
 </div>
-
-<!-- PHOTO 2 -->
 
 <div class="balloon b2">
 <img src="./photo2.jpg.jpg">
 </div>
 
-<!-- PHOTO 3 -->
-
 <div class="balloon b3">
 <img src="./photo3.jpg.jpg">
 </div>
-
-<!-- PHOTO 4 -->
 
 <div class="balloon b4">
 <img src="./photo4.jpg.jpg">
@@ -300,7 +292,7 @@ Our Cute Memories ❤️
 
 /* HEARTS */
 
-for(let i=0;i<70;i++){
+for(let i=0;i<80;i++){
 
 let heart=document.createElement("div");
 
@@ -318,53 +310,7 @@ document.getElementById("hearts").appendChild(heart);
 
 }
 
-/* DATE */
-
-const targetDate = new Date("June 26, 2026 00:00:00").getTime();
-
-const btn = document.getElementById("openBtn");
-
-setInterval(()=>{
-
-const now = new Date().getTime();
-
-const distance = targetDate - now;
-
-const days = Math.floor(distance / (1000*60*60*24));
-const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
-
-if(distance <= 0){
-
-btn.innerHTML="🎁 Open Surprise 🎁";
-
-btn.style.cursor="pointer";
-btn.style.opacity="1";
-
-btn.onclick=()=>{
-
-document.getElementById("countdownPage").style.display="none";
-
-document.getElementById("galleryPage").style.display="flex";
-
-};
-
-}
-
-},1000);
-
-/* TESTING MODE */
-/* REMOVE THIS LATER */
-
-document.getElementById("openBtn").innerHTML="🎁 Open Surprise 🎁";
-document.getElementById("openBtn").style.cursor="pointer";
-document.getElementById("openBtn").style.opacity="1";
+/* OPEN PAGE */
 
 document.getElementById("openBtn").onclick=()=>{
 
