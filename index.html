@@ -22,7 +22,7 @@ overflow:hidden;
 background:#ffc0cb;
 }
 
-/* PAGE */
+/* PAGES */
 
 .page{
 position:absolute;
@@ -40,8 +40,9 @@ overflow:hidden;
 .heart{
 position:absolute;
 font-size:30px;
-animation:float 10s linear infinite;
+animation:float 7s linear infinite;
 opacity:0.8;
+pointer-events:none;
 }
 
 @keyframes float{
@@ -55,7 +56,7 @@ opacity:1;
 }
 }
 
-/* FIRST PAGE */
+/* PAGE 1 */
 
 #countdownPage{
 background:#ffc0cb;
@@ -136,12 +137,16 @@ overflow:hidden;
 
 .gallery-title{
 position:absolute;
-top:45px;
+top:50px;
+left:50%;
+transform:translateX(-50%);
 font-size:65px;
 font-weight:700;
-color:white;
-text-shadow:0 0 25px white;
-z-index:5;
+color:#ff69b4;
+text-shadow:0 0 25px #ff69b4;
+z-index:10;
+text-align:center;
+width:100%;
 }
 
 /* BALLOONS */
@@ -167,8 +172,6 @@ border:6px solid white;
 box-shadow:0 0 35px white;
 }
 
-/* BALLOON TOP */
-
 .balloon::before{
 content:"🎈";
 position:absolute;
@@ -178,14 +181,14 @@ transform:translateX(-50%);
 font-size:70px;
 }
 
-/* FLOAT */
+/* FASTER FLOAT */
 
 @keyframes fly{
 0%{
 transform:translateY(0);
 }
 100%{
-transform:translateY(-180vh);
+transform:translateY(-190vh);
 }
 }
 
@@ -193,22 +196,73 @@ transform:translateY(-180vh);
 
 .b1{
 left:2%;
-animation-duration:18s;
+animation-duration:12s;
 }
 
 .b2{
 left:27%;
-animation-duration:22s;
+animation-duration:14s;
 }
 
 .b3{
 left:52%;
-animation-duration:20s;
+animation-duration:13s;
 }
 
 .b4{
 left:76%;
-animation-duration:24s;
+animation-duration:15s;
+}
+
+/* MEMORY BUTTON */
+
+#memoryBtn{
+position:absolute;
+bottom:-200px;
+left:50%;
+transform:translateX(-50%);
+padding:22px 40px;
+font-size:24px;
+font-weight:600;
+border:none;
+border-radius:60px;
+background:#ff69b4;
+color:white;
+box-shadow:0 0 30px #ff69b4;
+cursor:pointer;
+transition:0.4s;
+z-index:20;
+opacity:0;
+}
+
+#memoryBtn.show{
+animation:riseButton 2s forwards;
+}
+
+@keyframes riseButton{
+0%{
+bottom:-200px;
+opacity:0;
+}
+100%{
+bottom:170px;
+opacity:1;
+}
+}
+
+#memoryBtn:hover{
+transform:translateX(-50%) scale(1.08);
+}
+
+/* PAGE 3 */
+
+#testPage{
+display:none;
+background:#ffc0cb;
+color:white;
+font-size:70px;
+font-weight:700;
+text-shadow:0 0 25px white;
 }
 
 </style>
@@ -294,13 +348,27 @@ Our Cute Memories ❤️
 <img src="./photo4.jpg.jpg">
 </div>
 
+<button id="memoryBtn">
+🩷 Test Your Muscle Memory Of Love And Bond 🩷
+</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="testPage">
+
+<div>
+Pink Test Page 💖
+</div>
+
 </div>
 
 <script>
 
 /* HEARTS */
 
-for(let i=0;i<80;i++){
+for(let i=0;i<120;i++){
 
 let heart=document.createElement("div");
 
@@ -310,7 +378,7 @@ heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
 
-heart.style.animationDuration=(5+Math.random()*10)+"s";
+heart.style.animationDuration=(4+Math.random()*6)+"s";
 
 heart.style.fontSize=(20+Math.random()*30)+"px";
 
@@ -318,13 +386,31 @@ document.getElementById("hearts").appendChild(heart);
 
 }
 
-/* OPEN PAGE */
+/* OPEN PAGE 2 */
 
 document.getElementById("openBtn").onclick=()=>{
 
 document.getElementById("countdownPage").style.display="none";
 
 document.getElementById("galleryPage").style.display="flex";
+
+/* BUTTON AFTER PHOTOS GO UP */
+
+setTimeout(()=>{
+
+document.getElementById("memoryBtn").classList.add("show");
+
+},5000);
+
+};
+
+/* OPEN PAGE 3 */
+
+document.getElementById("memoryBtn").onclick=()=>{
+
+document.getElementById("galleryPage").style.display="none";
+
+document.getElementById("testPage").style.display="flex";
 
 };
 
