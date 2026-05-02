@@ -1,76 +1,90 @@
+```html
 <!-- ========================================= -->
-<!-- PAGE 3 — LOVE BOND QUIZ 💖 -->
-<!-- ADD THIS BELOW YOUR GALLERY PAGE -->
+<!-- REPLACE ONLY THIS PART IN YOUR CODE 💖 -->
 <!-- ========================================= -->
 
-<div class="page hidden" id="quizPage">
+<!-- DELETE THIS OLD PAGE -->
 
-    <div class="quiz-container">
+<!--
+<div class="page" id="testPage">
 
-        <h1 class="quiz-title">
-            Test Your Muscle Memory Of Love & Bond 💖
-        </h1>
+<div class="blankText">
+Pink Test Page 💕
+</div>
 
-        <div class="kiss-counter">
-            💋 Kiss Coupons Earned:
-            <span id="kissCount">0</span>/5
-        </div>
+</div>
+-->
 
-        <!-- QUESTION CARD -->
+<!-- ========================================= -->
+<!-- NEW LOVE BOND QUIZ PAGE 💖 -->
+<!-- ========================================= -->
 
-        <div class="question-card">
+<div class="page" id="quizPage" style="display:none; background:#ffc7d8;">
 
-            <h2 id="questionText">
-                Loading Question...
-            </h2>
+<div class="quiz-container">
 
-            <div class="answers">
+<h1 class="quiz-title">
+Test Your Muscle Memory Of Love & Bond 💖
+</h1>
 
-                <button class="answer-btn" onclick="checkAnswer(this)">
-                    Option 1
-                </button>
+<div class="kiss-counter">
+💋 Kiss Coupons Earned:
+<span id="kissCount">0</span>/5
+</div>
 
-                <button class="answer-btn" onclick="checkAnswer(this)">
-                    Option 2
-                </button>
+<div class="question-card">
 
-                <button class="answer-btn" onclick="checkAnswer(this)">
-                    Option 3
-                </button>
+<h2 id="questionText">
+Loading Question...
+</h2>
 
-                <button class="answer-btn" onclick="checkAnswer(this)">
-                    Option 4
-                </button>
+<div class="answers">
 
-            </div>
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 1
+</button>
 
-        </div>
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 2
+</button>
 
-    </div>
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 3
+</button>
+
+<button class="answer-btn" onclick="checkAnswer(this)">
+Option 4
+</button>
+
+</div>
+
+</div>
+
+</div>
 
 </div>
 
 <!-- ========================================= -->
-<!-- COUPON POPUP 💋 -->
+<!-- COUPON POPUP 💖 -->
 <!-- ========================================= -->
 
 <div id="couponPopup">
 
-    <div class="coupon-card">
+<div class="coupon-card">
 
-        <div class="coupon-left">
-            ONE KISS
-        </div>
+<div class="coupon-left">
+ONE KISS
+</div>
 
-        <div class="coupon-right">
-            COUPON
-        </div>
+<div class="coupon-right">
+COUPON
+</div>
 
-    </div>
+</div>
 
-    <p class="coupon-text">
-        Correct Answer Baby 😭💖
-    </p>
+<p class="coupon-text">
+Correct Answer Baby 😭💖
+</p>
 
 </div>
 
@@ -78,203 +92,193 @@
 <!-- FINAL PAGE 💖 -->
 <!-- ========================================= -->
 
-<div class="page hidden" id="finalLovePage">
+<div class="page" id="finalLovePage" style="display:none; background:#ffbfd1;">
 
-    <div class="final-box">
+<div class="final-box">
 
-        <h1>
-            You Earned 5 Kiss Coupons 💋🎟️
-        </h1>
+<h1>
+You Earned 5 Kiss Coupons 💋🎟️
+</h1>
 
-        <p>
-            Certified Love Champion 😭💖
-        </p>
+<p>
+Certified Love Champion 😭💖
+</p>
 
-    </div>
+</div>
 
 </div>
 
 <!-- ========================================= -->
-<!-- CSS START 💖 -->
+<!-- ADD THIS CSS ABOVE </style> 💖 -->
 <!-- ========================================= -->
 
 <style>
 
 #quizPage{
-    min-height:100vh;
-    background:#ffc7d8;
-    overflow:hidden;
-    position:relative;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:40px;
+justify-content:center;
+align-items:center;
+padding:40px;
+overflow:hidden;
 }
 
 .quiz-container{
-    width:100%;
-    max-width:700px;
-    text-align:center;
+width:100%;
+max-width:700px;
+text-align:center;
 }
 
 .quiz-title{
-    font-size:55px;
-    color:white;
-    text-shadow:0 0 20px hotpink;
-    margin-bottom:25px;
+font-size:55px;
+color:white;
+text-shadow:0 0 20px hotpink;
+margin-bottom:25px;
 }
 
 .kiss-counter{
-    font-size:28px;
-    color:#ff2e74;
-    font-weight:bold;
-    margin-bottom:30px;
+font-size:28px;
+color:#ff2e74;
+font-weight:bold;
+margin-bottom:30px;
 }
 
 .question-card{
-    background:rgba(255,255,255,0.3);
-    backdrop-filter:blur(10px);
-    padding:40px;
-    border-radius:30px;
-    box-shadow:0 0 30px rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.3);
+backdrop-filter:blur(10px);
+padding:40px;
+border-radius:30px;
+box-shadow:0 0 30px rgba(255,255,255,0.5);
 }
 
 .question-card h2{
-    color:white;
-    font-size:34px;
-    margin-bottom:30px;
+color:white;
+font-size:34px;
+margin-bottom:30px;
 }
 
 .answers{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
 }
 
 .answer-btn{
-    padding:18px;
-    border:none;
-    border-radius:20px;
-    font-size:20px;
-    font-weight:bold;
-    cursor:pointer;
-    background:white;
-    color:#ff2e74;
-    transition:0.3s;
+padding:18px;
+border:none;
+border-radius:20px;
+font-size:20px;
+font-weight:bold;
+cursor:pointer;
+background:white;
+color:#ff2e74;
+transition:0.3s;
 }
 
 .answer-btn:hover{
-    transform:scale(1.05);
-    background:#ff2e74;
-    color:white;
+transform:scale(1.05);
+background:#ff2e74;
+color:white;
 }
 
 #couponPopup{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%) scale(0);
-    z-index:99999;
-    text-align:center;
-    transition:0.5s;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+z-index:99999;
+text-align:center;
+transition:0.5s;
 }
 
 #couponPopup.show{
-    transform:translate(-50%,-50%) scale(1);
+transform:translate(-50%,-50%) scale(1);
 }
 
 .coupon-card{
-    width:380px;
-    height:170px;
-    background:#ffd6e2;
-    border:6px solid #444;
-    border-radius:20px;
-    display:flex;
-    overflow:hidden;
-    box-shadow:0 0 40px hotpink;
+width:380px;
+height:170px;
+background:#ffd6e2;
+border:6px solid #444;
+border-radius:20px;
+display:flex;
+overflow:hidden;
+box-shadow:0 0 40px hotpink;
 }
 
 .coupon-left{
-    flex:3;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:45px;
-    color:#222;
-    font-weight:bold;
+flex:3;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:45px;
+color:#222;
+font-weight:bold;
 }
 
 .coupon-right{
-    flex:1;
-    border-left:5px dashed #444;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    writing-mode:vertical-rl;
-    font-size:30px;
-    font-weight:bold;
+flex:1;
+border-left:5px dashed #444;
+display:flex;
+justify-content:center;
+align-items:center;
+writing-mode:vertical-rl;
+font-size:30px;
+font-weight:bold;
 }
 
 .coupon-text{
-    margin-top:20px;
-    color:white;
-    font-size:28px;
-    text-shadow:0 0 15px hotpink;
-}
-
-#finalLovePage{
-    min-height:100vh;
-    background:#ffbfd1;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+margin-top:20px;
+color:white;
+font-size:28px;
+text-shadow:0 0 15px hotpink;
 }
 
 .final-box{
-    text-align:center;
+text-align:center;
 }
 
 .final-box h1{
-    font-size:70px;
-    color:white;
-    text-shadow:0 0 20px hotpink;
+font-size:70px;
+color:white;
+text-shadow:0 0 20px hotpink;
 }
 
 .final-box p{
-    font-size:35px;
-    color:#ff2e74;
-    margin-top:20px;
-}
-
-/* FLOATING HEARTS */
-
-.quiz-heart{
-    position:absolute;
-    bottom:-100px;
-    color:pink;
-    animation:quizFloat linear infinite;
-    opacity:0.7;
-}
-
-@keyframes quizFloat{
-
-    0%{
-        transform:translateY(0) scale(1);
-    }
-
-    100%{
-        transform:translateY(-120vh) scale(1.5);
-    }
-
+font-size:35px;
+color:#ff2e74;
+margin-top:20px;
 }
 
 </style>
 
 <!-- ========================================= -->
-<!-- SCRIPT START 💖 -->
+<!-- REPLACE THIS OLD SCRIPT 💖 -->
 <!-- ========================================= -->
 
+<!-- DELETE THIS -->
+
+<!--
+document.getElementById("memoryBtn").onclick=()=>{
+
+document.getElementById("galleryPage").style.display="none";
+
+document.getElementById("testPage").style.display="flex";
+
+};
+-->
+
+<!-- ADD THIS NEW SCRIPT -->
+
 <script>
+
+document.getElementById("memoryBtn").onclick=()=>{
+
+document.getElementById("galleryPage").style.display="none";
+
+document.getElementById("quizPage").style.display="flex";
+
+};
+
+/* QUESTIONS */
 
 const questions = [
 
@@ -353,15 +357,15 @@ const buttons = document.querySelectorAll(".answer-btn");
 
 function loadQuestion(){
 
-    let q = questions[currentQuestion];
+let q = questions[currentQuestion];
 
-    questionText.innerHTML = q.question;
+questionText.innerHTML = q.question;
 
-    buttons.forEach((btn,index)=>{
+buttons.forEach((btn,index)=>{
 
-        btn.innerHTML = q.answers[index];
+btn.innerHTML = q.answers[index];
 
-    });
+});
 
 }
 
@@ -369,90 +373,61 @@ loadQuestion();
 
 function checkAnswer(button){
 
-    let selected = button.innerHTML;
+let selected = button.innerHTML;
 
-    let correct = questions[currentQuestion].correct;
+let correct = questions[currentQuestion].correct;
 
-    if(selected === correct){
+if(selected === correct){
 
-        score++;
+score++;
 
-        document.getElementById("kissCount").innerHTML = score;
+document.getElementById("kissCount").innerHTML = score;
 
-        showCoupon();
+showCoupon();
 
-        createHeartBurst();
+}else{
 
-    }else{
+alert("Areee wrong answer baby 😭💔");
 
-        alert("Areee wrong answer baby 😭💔");
+}
 
-    }
+currentQuestion++;
 
-    currentQuestion++;
+if(currentQuestion < questions.length){
 
-    if(currentQuestion < questions.length){
+setTimeout(()=>{
 
-        setTimeout(()=>{
+loadQuestion();
 
-            loadQuestion();
+},800);
 
-        },800);
+}else{
 
-    }else{
+setTimeout(()=>{
 
-        setTimeout(()=>{
+document.getElementById("quizPage").style.display="none";
 
-            document.getElementById("quizPage").style.display="none";
+document.getElementById("finalLovePage").style.display="flex";
 
-            document.getElementById("finalLovePage").style.display="flex";
+},1200);
 
-        },1200);
-
-    }
+}
 
 }
 
 function showCoupon(){
 
-    let popup = document.getElementById("couponPopup");
+let popup = document.getElementById("couponPopup");
 
-    popup.classList.add("show");
+popup.classList.add("show");
 
-    setTimeout(()=>{
+setTimeout(()=>{
 
-        popup.classList.remove("show");
+popup.classList.remove("show");
 
-    },1800);
-
-}
-
-function createHeartBurst(){
-
-    for(let i=0;i<20;i++){
-
-        let heart = document.createElement("div");
-
-        heart.innerHTML="💖";
-
-        heart.classList.add("quiz-heart");
-
-        heart.style.left=Math.random()*100+"vw";
-
-        heart.style.fontSize=(20+Math.random()*40)+"px";
-
-        heart.style.animationDuration=(3+Math.random()*4)+"s";
-
-        document.getElementById("quizPage").appendChild(heart);
-
-        setTimeout(()=>{
-
-            heart.remove();
-
-        },7000);
-
-    }
+},1800);
 
 }
 
 </script>
+```
