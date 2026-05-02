@@ -1,7 +1,9 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -36,7 +38,7 @@ flex-direction:column;
 overflow:hidden;
 }
 
-/* HEARTS */
+/* FLOATING HEARTS */
 
 .heart{
 position:absolute;
@@ -262,49 +264,88 @@ opacity:1;
 transform:translateX(-50%) scale(1.08);
 }
 
+/* RULES PAGE */
+
+#rulesPage{
+display:none;
+background:#ffc7d8;
+}
+
+.rules-box{
+background:rgba(255,255,255,0.3);
+backdrop-filter:blur(10px);
+padding:45px;
+border-radius:35px;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+text-align:center;
+width:85%;
+max-width:700px;
+}
+
+.rules-title{
+font-size:55px;
+color:white;
+text-shadow:0 0 20px hotpink;
+margin-bottom:30px;
+}
+
+.rules-list{
+list-style:none;
+font-size:24px;
+color:white;
+line-height:2;
+margin-bottom:35px;
+}
+
+#playQuizBtn{
+padding:18px 40px;
+border:none;
+border-radius:50px;
+background:#ff2e74;
+color:white;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 25px hotpink;
+transition:0.3s;
+}
+
+#playQuizBtn:hover{
+transform:scale(1.08);
+}
+
 /* QUIZ PAGE */
 
 #quizPage{
 display:none;
 background:#ffc7d8;
-justify-content:center;
-align-items:center;
-padding:40px;
-overflow:hidden;
 }
 
 .quiz-container{
 width:100%;
 max-width:700px;
 text-align:center;
-z-index:10;
-}
-
-.quiz-title{
-font-size:55px;
-color:white;
-text-shadow:0 0 20px hotpink;
-margin-bottom:25px;
 }
 
 .kiss-counter{
-font-size:28px;
-color:#ff2e74;
+font-size:30px;
 font-weight:bold;
+color:#ff2e74;
 margin-bottom:30px;
 }
 
 .question-card{
 background:rgba(255,255,255,0.3);
 backdrop-filter:blur(10px);
-padding:40px;
-border-radius:30px;
-box-shadow:0 0 30px rgba(255,255,255,0.5);
+padding:45px;
+border-radius:35px;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+transition:1s;
 }
 
 .question-card h2{
+font-size:36px;
 color:white;
-font-size:34px;
 margin-bottom:30px;
 }
 
@@ -320,9 +361,9 @@ border:none;
 border-radius:20px;
 font-size:20px;
 font-weight:bold;
-cursor:pointer;
 background:white;
 color:#ff2e74;
+cursor:pointer;
 transition:0.3s;
 }
 
@@ -332,7 +373,7 @@ background:#ff2e74;
 color:white;
 }
 
-/* COUPON */
+/* COUPON POPUP */
 
 #couponPopup{
 position:fixed;
@@ -340,8 +381,8 @@ top:50%;
 left:50%;
 transform:translate(-50%,-50%) scale(0);
 z-index:99999;
-text-align:center;
 transition:0.5s;
+text-align:center;
 }
 
 #couponPopup.show{
@@ -365,7 +406,6 @@ display:flex;
 justify-content:center;
 align-items:center;
 font-size:45px;
-color:#222;
 font-weight:bold;
 }
 
@@ -382,8 +422,8 @@ font-weight:bold;
 
 .coupon-text{
 margin-top:20px;
-color:white;
 font-size:28px;
+color:white;
 text-shadow:0 0 15px hotpink;
 }
 
@@ -392,8 +432,6 @@ text-shadow:0 0 15px hotpink;
 #finalLovePage{
 display:none;
 background:#ffbfd1;
-justify-content:center;
-align-items:center;
 }
 
 .final-box{
@@ -401,15 +439,44 @@ text-align:center;
 }
 
 .final-box h1{
-font-size:70px;
+font-size:60px;
 color:white;
-text-shadow:0 0 20px hotpink;
+text-shadow:0 0 25px hotpink;
 }
 
-.final-box p{
-font-size:35px;
-color:#ff2e74;
+.downloadBtn,
+#nextBlankPageBtn{
 margin-top:20px;
+padding:18px 40px;
+border:none;
+border-radius:50px;
+background:#ff2e74;
+color:white;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 25px hotpink;
+transition:0.3s;
+}
+
+.downloadBtn:hover,
+#nextBlankPageBtn:hover{
+transform:scale(1.08);
+}
+
+/* LAST PAGE */
+
+#pinkBlankPage{
+display:none;
+background:#ffc0cb;
+}
+
+.blank-title{
+font-size:70px;
+color:white;
+text-shadow:0 0 25px hotpink;
+text-align:center;
+padding:20px;
 }
 
 /* MOBILE */
@@ -446,30 +513,30 @@ padding:18px 25px;
 width:85%;
 }
 
-.quiz-title{
+.rules-title{
 font-size:38px;
 }
 
+.rules-list{
+font-size:18px;
+}
+
 .question-card h2{
-font-size:25px;
+font-size:24px;
 }
 
 .answers{
 grid-template-columns:1fr;
 }
 
-.answer-btn{
-font-size:18px;
-}
-
-.final-box h1{
+.blank-title{
 font-size:42px;
-padding:20px;
 }
 
 }
 
 </style>
+
 </head>
 
 <body>
@@ -556,22 +623,50 @@ Our Cute Memories 💖
 
 </div>
 
-<!-- PAGE 3 QUIZ -->
+<!-- RULES PAGE -->
+
+<div class="page" id="rulesPage">
+
+<div class="rules-box">
+
+<h1 class="rules-title">
+Love Bond Rules 💖
+</h1>
+
+<ul class="rules-list">
+
+<li>💋 Every correct answer earns one Kiss Coupon</li>
+
+<li>❤️ No cheating allowed baby</li>
+
+<li>✨ Think carefully before answering</li>
+
+<li>🎟️ All coupons can be claimed at the end</li>
+
+<li>😭 Wrong answers may break Modak’s heart</li>
+
+</ul>
+
+<button id="playQuizBtn">
+▶ Play Love Challenge
+</button>
+
+</div>
+
+</div>
+
+<!-- QUIZ PAGE -->
 
 <div class="page" id="quizPage">
 
 <div class="quiz-container">
 
-<h1 class="quiz-title">
-Test Your Muscle Memory Of Love & Bond 💖
-</h1>
-
 <div class="kiss-counter">
-💋 Kiss Coupons Earned:
+💋 Kiss Coupons:
 <span id="kissCount">0</span>/5
 </div>
 
-<div class="question-card">
+<div class="question-card" id="questionCard">
 
 <h2 id="questionText">
 Loading Question...
@@ -620,7 +715,9 @@ COUPON
 </div>
 
 <p class="coupon-text">
-Correct Answer Baby 😭💖
+Congrats Baby Mio 😭💖
+<br>
+You Won A Kissing Coupon 💋🎟️
 </p>
 
 </div>
@@ -635,11 +732,36 @@ Correct Answer Baby 😭💖
 You Earned 5 Kiss Coupons 💋🎟️
 </h1>
 
-<p>
-Certified Love Champion 😭💖
-</p>
+<img src="https://i.imgur.com/6RL0R6Y.png"
+style="width:320px; margin-top:25px; border-radius:25px; box-shadow:0 0 35px hotpink;">
+
+<br>
+
+<a href="https://i.imgur.com/6RL0R6Y.png" download>
+
+<button class="downloadBtn">
+⬇ Download Your Coupons
+</button>
+
+</a>
+
+<br>
+
+<button id="nextBlankPageBtn">
+➡ Next Page
+</button>
 
 </div>
+
+</div>
+
+<!-- LAST PAGE -->
+
+<div class="page" id="pinkBlankPage">
+
+<h1 class="blank-title">
+More Love Coming Tomorrow 💖
+</h1>
 
 </div>
 
@@ -687,18 +809,17 @@ const now = new Date().getTime();
 
 const distance = targetDate - now;
 
-const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+document.getElementById("days").innerHTML =
+Math.floor(distance / (1000 * 60 * 60 * 24));
 
-const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+document.getElementById("hours").innerHTML =
+Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 
-const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+document.getElementById("minutes").innerHTML =
+Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 
-const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
+document.getElementById("seconds").innerHTML =
+Math.floor((distance % (1000 * 60)) / 1000);
 
 },1000);
 
@@ -720,11 +841,21 @@ document.getElementById("memoryBtn").classList.add("show");
 
 };
 
-/* OPEN QUIZ */
+/* OPEN RULES */
 
 document.getElementById("memoryBtn").onclick=()=>{
 
 document.getElementById("galleryPage").style.display="none";
+
+document.getElementById("rulesPage").style.display="flex";
+
+};
+
+/* START QUIZ */
+
+document.getElementById("playQuizBtn").onclick=()=>{
+
+document.getElementById("rulesPage").style.display="none";
 
 document.getElementById("quizPage").style.display="flex";
 
@@ -823,6 +954,8 @@ btn.innerHTML = q.answers[index];
 
 loadQuestion();
 
+/* CHECK ANSWER */
+
 function checkAnswer(button){
 
 let selected = button.innerHTML;
@@ -839,9 +972,12 @@ showCoupon();
 
 }else{
 
-alert("Areee wrong answer baby 😭💔");
+alert("Wrong answer baby 😭💔");
 
 }
+
+document.getElementById("questionCard").style.transform="translateY(-100vh)";
+document.getElementById("questionCard").style.opacity="0";
 
 currentQuestion++;
 
@@ -849,9 +985,12 @@ if(currentQuestion < questions.length){
 
 setTimeout(()=>{
 
+document.getElementById("questionCard").style.transform="translateY(0)";
+document.getElementById("questionCard").style.opacity="1";
+
 loadQuestion();
 
-},800);
+},1200);
 
 }else{
 
@@ -861,15 +1000,17 @@ document.getElementById("quizPage").style.display="none";
 
 document.getElementById("finalLovePage").style.display="flex";
 
-},1200);
+},1800);
 
 }
 
 }
+
+/* COUPON POPUP */
 
 function showCoupon(){
 
-let popup = document.getElementById("couponPopup");
+let popup=document.getElementById("couponPopup");
 
 popup.classList.add("show");
 
@@ -880,6 +1021,16 @@ popup.classList.remove("show");
 },1800);
 
 }
+
+/* LAST PAGE */
+
+document.getElementById("nextBlankPageBtn").onclick=()=>{
+
+document.getElementById("finalLovePage").style.display="none";
+
+document.getElementById("pinkBlankPage").style.display="flex";
+
+};
 
 </script>
 
