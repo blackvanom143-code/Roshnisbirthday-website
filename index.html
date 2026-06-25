@@ -1,222 +1,942 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mio's Birthday 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { overflow-x: hidden; background: #ffc0cb; }
-        
-        /* Smooth scrolling container fixes */
-        .page { 
-            display: none; 
-            width: 100%; 
-            min-height: 100vh; 
-            justify-content: center; 
-            align-items: center; 
-            flex-direction: column; 
-            padding: 40px 20px;
-        }
-        
-        /* Active page class */
-        .page.active { display: flex !important; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mio's Birthday 💖</title>
 
-        /* HEARTS BACKGROUND */
-        .heart { position: fixed; font-size: 30px; animation: floatHeart linear infinite; opacity: 0.7; pointer-events: none; z-index: 1; bottom: -50px; }
-        @keyframes floatHeart { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        /* PAGE 1 */
-        #countdownPage { background: #ffc0cb; color: white; text-align: center; }
-        .main-title { font-size: 65px; font-weight: 700; margin-bottom: 20px; text-shadow: 0 0 20px hotpink; }
-        .subtitle { font-size: 24px; margin-bottom: 40px; }
-        .countdown { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .box { width: 140px; height: 140px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 30px; display: flex; justify-content: center; align-items: center; flex-direction: column; box-shadow: 0 0 35px rgba(255,255,255,0.5); }
-        .box h1 { font-size: 48px; }
-        .box p { font-size: 18px; }
+<style>
 
-        #openBtn, #playQuizBtn, .downloadBtn, #nextBlankPageBtn, #surpriseBtn, #memoryBtn {
-            margin-top: 30px; padding: 18px 40px; border: none; border-radius: 50px; background: #ff2e74; color: white; font-size: 22px; font-weight: bold; cursor: pointer; box-shadow: 0 0 25px hotpink; z-index: 100; position: relative; transition: 0.3s;
-        }
-        #openBtn:hover, #surpriseBtn:hover { transform: scale(1.05); }
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
 
-        /* PAGE 2 - BALLOONS */
-        #galleryPage { background: black; min-height: 100vh; position: relative; }
-        .gallery-title { font-size: 50px; color: #ff69b4; text-shadow: 0 0 25px hotpink; margin-bottom: 50px; text-align: center; }
-        .balloon-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; width: 100%; max-width: 1200px; margin-bottom: 40px; }
-        .balloon { width: 200px; text-align: center; position: relative; }
-        .balloon img { width: 100%; height: 250px; object-fit: cover; border-radius: 20px; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+body{
+overflow-x:hidden;
+background:#ffc0cb;
+}
 
-        /* BOXES & CARDS */
-        .rules-box, .question-card, .love-letter-box, .secret-box { background: rgba(255,255,255,0.25); backdrop-filter: blur(10px); padding: 45px; border-radius: 35px; width: 90%; max-width: 850px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .rules-title, .love-title, .secret-title { font-size: 45px; color: white; margin-bottom: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        .rules-list { list-style: none; font-size: 22px; line-height: 2; color: white; text-align: left; max-width: 500px; margin: 0 auto 30px auto; }
+.page{
+position:absolute;
+width:100%;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+overflow:hidden;
+}
 
-        /* QUIZ */
-        .kiss-counter { font-size: 30px; font-weight: bold; color: #ff2e74; margin-bottom: 30px; }
-        .question-card h2 { font-size: 30px; color: white; margin-bottom: 30px; }
-        .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
-        .answer-btn { padding: 18px; border: none; border-radius: 20px; font-size: 18px; font-weight: bold; background: white; color: #ff2e74; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .answer-btn:hover { background: #ffd6e2; }
+/* HEARTS */
 
-        /* COUPON POPUP */
-        #couponPopup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; text-align: center; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
-        #couponPopup.show { transform: translate(-50%, -50%) scale(1); }
-        .coupon-card { width: 320px; height: 140px; background: #ffd6e2; border-radius: 20px; display: flex; overflow: hidden; border: 2px dashed #ff2e74; }
-        .coupon-left { flex: 3; display: flex; justify-content: center; align-items: center; font-size: 36px; font-weight: bold; color: #ff2e74; }
-        .coupon-right { flex: 1; display: flex; justify-content: center; align-items: center; font-weight: bold; writing-mode: vertical-rl; font-size: 22px; border-left: 3px dashed #ff2e74; color: #ff2e74; }
-        .coupon-text { margin-top: 15px; font-size: 22px; color: #ff2e74; font-weight: bold; }
+.heart{
+position:absolute;
+font-size:30px;
+animation:floatHeart linear infinite;
+opacity:0.7;
+pointer-events:none;
+z-index:1;
+}
 
-        /* LOVE LETTER & PLAN TEXT */
-        .love-paragraph, .secret-text { font-size: 22px; line-height: 1.8; color: white; text-align: justify; white-space: pre-line; }
-        .ending-line { margin-top: 35px; font-size: 36px; color: #ff2e74; text-shadow: 0 2px 10px rgba(255,255,255,0.6); }
+@keyframes floatHeart{
 
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .main-title { font-size: 38px; }
-            .gallery-title { font-size: 34px; }
-            .answers { grid-template-columns: 1fr; }
-            .love-paragraph, .secret-text, .rules-list { font-size: 18px; }
-            .box { width: 110px; height: 110px; }
-            .box h1 { font-size: 36px; }
-        }
-    </style>
+0%{
+transform:translateY(120vh);
+opacity:0;
+}
+
+100%{
+transform:translateY(-120vh);
+opacity:1;
+}
+
+}
+
+/* PAGE 1 */
+
+#countdownPage{
+background:#ffc0cb;
+color:white;
+text-align:center;
+}
+
+.main-title{
+font-size:65px;
+font-weight:700;
+margin-bottom:20px;
+text-shadow:0 0 20px hotpink;
+}
+
+.subtitle{
+font-size:24px;
+margin-bottom:40px;
+}
+
+.countdown{
+display:flex;
+gap:20px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.box{
+width:150px;
+height:150px;
+background:rgba(255,255,255,0.2);
+backdrop-filter:blur(10px);
+border-radius:30px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+box-shadow:0 0 35px rgba(255,255,255,0.5);
+}
+
+.box h1{
+font-size:55px;
+}
+
+.box p{
+font-size:20px;
+}
+
+#openBtn,
+#playQuizBtn,
+.downloadBtn,
+#nextBlankPageBtn,
+#surpriseBtn,
+#memoryBtn{
+
+margin-top:30px;
+padding:18px 40px;
+border:none;
+border-radius:50px;
+background:#ff2e74;
+color:white;
+font-size:22px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 0 25px hotpink;
+}
+
+/* PAGE 2 */
+
+#galleryPage{
+display:none;
+background:black;
+overflow:hidden;
+height:100vh;
+}
+
+.gallery-title{
+position:absolute;
+top:40px;
+left:50%;
+transform:translateX(-50%);
+font-size:65px;
+color:#ff69b4;
+text-shadow:0 0 25px hotpink;
+z-index:10;
+}
+
+.balloon{
+position:absolute;
+bottom:-400px;
+width:220px;
+height:220px;
+animation:flyUp linear infinite;
+}
+
+.balloon img{
+width:100%;
+height:100%;
+object-fit:contain;
+border-radius:30px;
+border:5px solid white;
+}
+
+.balloon::before{
+content:"🎈";
+position:absolute;
+top:-60px;
+left:50%;
+transform:translateX(-50%);
+font-size:60px;
+}
+
+@keyframes flyUp{
+
+0%{
+transform:translateY(0);
+}
+
+100%{
+transform:translateY(-180vh);
+}
+
+}
+
+.b1{left:2%; animation-duration:11s;}
+.b2{left:27%; animation-duration:13s;}
+.b3{left:52%; animation-duration:12s;}
+.b4{left:77%; animation-duration:14s;}
+
+/* RULES PAGE */
+
+#rulesPage{
+display:none;
+background:#ffc7d8;
+}
+
+.rules-box,
+.question-card,
+.love-letter-box,
+.secret-box{
+
+background:rgba(255,255,255,0.25);
+backdrop-filter:blur(10px);
+padding:45px;
+border-radius:35px;
+width:90%;
+max-width:850px;
+text-align:center;
+}
+
+.rules-title,
+.love-title,
+.secret-title{
+font-size:55px;
+color:white;
+margin-bottom:30px;
+}
+
+.rules-list{
+list-style:none;
+font-size:24px;
+line-height:2;
+color:white;
+}
+
+/* QUIZ PAGE */
+
+#quizPage{
+display:none;
+background:#ffc7d8;
+}
+
+.kiss-counter{
+font-size:30px;
+font-weight:bold;
+color:#ff2e74;
+margin-bottom:30px;
+}
+
+.question-card h2{
+font-size:34px;
+color:white;
+margin-bottom:30px;
+}
+
+.answers{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:20px;
+}
+
+.answer-btn{
+padding:18px;
+border:none;
+border-radius:20px;
+font-size:20px;
+font-weight:bold;
+background:white;
+color:#ff2e74;
+cursor:pointer;
+}
+
+/* COUPON */
+
+#couponPopup{
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%) scale(0);
+transition:0.5s;
+z-index:9999;
+text-align:center;
+}
+
+#couponPopup.show{
+transform:translate(-50%,-50%) scale(1);
+}
+
+.coupon-card{
+width:350px;
+height:160px;
+background:#ffd6e2;
+border-radius:20px;
+display:flex;
+overflow:hidden;
+}
+
+.coupon-left,
+.coupon-right{
+display:flex;
+justify-content:center;
+align-items:center;
+font-weight:bold;
+}
+
+.coupon-left{
+flex:3;
+font-size:42px;
+}
+
+.coupon-right{
+flex:1;
+writing-mode:vertical-rl;
+font-size:28px;
+border-left:4px dashed black;
+}
+
+.coupon-text{
+margin-top:15px;
+font-size:26px;
+color:white;
+}
+
+/* FINAL PAGE */
+
+#finalLovePage{
+display:none;
+background:#ffbfd1;
+}
+
+.final-box{
+text-align:center;
+}
+
+.final-box h1{
+font-size:55px;
+color:white;
+}
+
+/* LOVE LETTER */
+
+#loveLetterPage{
+display:none;
+background:#ffc7d8;
+padding:60px 20px;
+width:100%;
+}
+
+.love-paragraph,
+.secret-text{
+font-size:24px;
+line-height:2;
+color:white;
+}
+
+/* SECRET PAGE */
+
+#secretPlanPage{
+display:none;
+background:#ffc0cb;
+padding:60px 20px;
+width:100%;
+}
+
+.ending-line{
+margin-top:35px;
+font-size:40px;
+color:#ff2e74;
+}
+
+@media(max-width:768px){
+
+.main-title{
+font-size:42px;
+padding:0 20px;
+}
+
+.gallery-title{
+font-size:42px;
+}
+
+.answers{
+grid-template-columns:1fr;
+}
+
+.love-paragraph,
+.secret-text,
+.rules-list{
+font-size:18px;
+}
+
+}
+
+</style>
+
 </head>
+
 <body>
 
-    <audio id="birthdayMusic" loop>
-        <source src="music.mp3.mp3" type="audio/mp3">
-    </audio>
+<audio id="birthdayMusic" loop>
+<source src="music.mp3.mp3" type="audio/mp3">
+</audio>
 
-    <div id="heartsContainer"></div>
+<div id="heartsContainer"></div>
 
-    <div class="page active" id="countdownPage">
-        <h1 class="main-title">Mio's Its Your Birthday ❤️</h1>
-        <p class="subtitle">Waiting for the most special day ✨</p>
-        <div class="countdown">
-            <div class="box"><h1 id="days">00</h1><p>Days</p></div>
-            <div class="box"><h1 id="hours">00</h1><p>Hours</p></div>
-            <div class="box"><h1 id="minutes">00</h1><p>Minutes</p></div>
-            <div class="box"><h1 id="seconds">00</h1><p>Seconds</p></div>
-        </div>
-        <button id="openBtn">🎁 Open Surprise 🎁</button>
-    </div>
+<!-- PAGE 1 -->
 
-    <div class="page" id="galleryPage">
-        <h1 class="gallery-title">Our Cute Memories 💖</h1>
-        <div class="balloon-container">
-            <div class="balloon"><img src="./photo1.jpg"></div>
-            <div class="balloon"><img src="./photo2.jpg"></div>
-            <div class="balloon"><img src="./photo3.jpg"></div>
-            <div class="balloon"><img src="./photo4.jpg"></div>
-        </div>
-        <button id="memoryBtn">💖 Test Your Memory & Bond 💖</button>
-    </div>
+<div class="page" id="countdownPage">
 
-    <div class="page" id="rulesPage">
-        <div class="rules-box">
-            <h1 class="rules-title">Love Bond Rules 💖</h1>
-            <ul class="rules-list">
-                <li>💋 Correct answer = 1 Kiss Coupon</li>
-                <li>❤️ No cheating allowed baby</li>
-                <li>✨ Think carefully before answering</li>
-                <li>🎟️ Claim all coupons at the end</li>
-                <li>😭 Wrong answers break Modak’s heart</li>
-            </ul>
-            <button id="playQuizBtn">▶ Play Love Challenge</button>
-        </div>
-    </div>
+<h1 class="main-title">
+Mio's Its Your Birthday ❤️
+</h1>
 
-    <div class="page" id="quizPage">
-        <div class="kiss-counter">💋 Kiss Coupons: <span id="kissCount">0</span>/5</div>
-        <div class="question-card">
-            <h2 id="questionText">Loading Question...</h2>
-            <div class="answers">
-                <button class="answer-btn" onclick="checkAnswer(this)"></button>
-                <button class="answer-btn" onclick="checkAnswer(this)"></button>
-                <button class="answer-btn" onclick="checkAnswer(this)"></button>
-                <button class="answer-btn" onclick="checkAnswer(this)"></button>
-            </div>
-        </div>
-    </div>
+<p class="subtitle">
+Waiting for the most special day ✨
+</p>
 
-    <div id="couponPopup">
-        <div class="coupon-card">
-            <div class="coupon-left">ONE KISS</div>
-            <div class="coupon-right">COUPON</div>
-        </div>
-        <p class="coupon-text">Congrats Baby Mio 😭💖</p>
-    </div>
+<div class="countdown">
 
-    <div class="page" id="finalLovePage">
-        <div class="rules-box">
-            <h1 class="rules-title" style="color: #ff2e74;">You Earned 5 Kiss Coupons 💋🎟️</h1>
-            <img src="./kiss-coupons.png" style="width:100%; max-width:320px; margin:20px 0; border-radius:20px;">
-            <br>
-            <a href="./kiss-coupons.png" download="kiss-coupons.png">
-                <button class="downloadBtn">⬇ Download Your Coupons</button>
-            </a>
-            <br>
-            <button id="nextBlankPageBtn">➡ Next Page</button>
-        </div>
-    </div>
+<div class="box">
+<h1 id="days">00</h1>
+<p>Days</p>
+</div>
 
-    <div class="page" id="loveLetterPage">
-        <div class="love-letter-box">
-            <h1 class="love-title">For My Little Mio 💖</h1>
-            <p class="love-paragraph">
-                Happy Birthday My Little Mio 🎂💖
+<div class="box">
+<h1 id="hours">00</h1>
+<p>Hours</p>
+</div>
 
-                25 December 2024 se lekar aaj tak humne itna sab kuch dekha hai... police wala scene, family problems, tension, fights... par ek cheez kabhi nahi badli — hum dono 😭❤️
+<div class="box">
+<h1 id="minutes">00</h1>
+<p>Minutes</p>
+</div>
 
-                Jab sab against tha tab bhi tu mere sath thi, aur mujhe pata hai future me bhi hum dono hamesha sath rahenge ✨
+<div class="box">
+<h1 id="seconds">00</h1>
+<p>Seconds</p>
+</div>
 
-                Tu sirf meri girlfriend nahi hai Mio... tu meri safest place hai 🥺💖
+</div>
 
-                Aur haan... tera Modak tujhe har birthday pe isi tarah special feel karvata rahega 😭🎀
+<button id="openBtn">
+🎁 Open Surprise 🎁
+</button>
 
-                I Love You So Much My Baby Little Mio 💋❤️
-            </p>
-            <button id="surpriseBtn">🎁 Surprise</button>
-        </div>
-    </div>
+</div>
 
-    <div class="page" id="secretPlanPage">
-        <div class="secret-box">
-            <h1 class="secret-title">26•06•2026 ✨</h1>
-            <p class="secret-text">
-                💌 11:00 AM sharp...  
-                Vasai Station Ticketcounter 
+<!-- PAGE 2 -->
 
-                🫶 Hint 1:   
-                Din ki beginning thodi peaceful aur silent hogi 💖
+<div class="page" id="galleryPage">
 
-                🎳 Hint 2:   
-                Aaj koi jeetega bhi... aur koi embarrass bhi hoga 😭
+<h1 class="gallery-title">
+Our Cute Memories 💖
+</h1>
 
-                📸 Hint 3:   
-                Aaj kuch memories sirf phone gallery ke liye nahi hongi ✨
+<div class="balloon b1">
+<img src="./photo1.jpg">
+</div>
 
-                🍴 Hint 4:   
-                Aaj “kya khana hai?” ka answer important nahi hoga 😌
+<div class="balloon b2">
+<img src="./photo2.jpg">
+</div>
 
-                🌅 Hint 5:   
-                Din khatam hone se pehle ek moment sabse zyada yaad rehega 🎂💖
+<div class="balloon b3">
+<img src="./photo3.jpg">
+</div>
 
-                🎁 Hint 6:   
-                Aaj ka pura plan kisi aur ko nahi pata... sirf ek Modak ko 😭✨
+<div class="balloon b4">
+<img src="./photo4.jpg">
+</div>
 
-                📍Final Hint:  
-                Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
+<button id="memoryBtn">
+💖 Test Your Muscle Memory Of Love And Bond 💖
+</button>
 
-                ⏰ Sharp 11:00 AM 💖
-            </p>
-            <h2 class="ending-line">I Love My Baby Little Mio Purely ❤️</h2>
-        </div>
-    </div>
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="rulesPage">
+
+<div class="rules-box">
+
+<h1 class="rules-title">
+Love Bond Rules 💖
+</h1>
+
+<ul class="rules-list">
+
+<li>💋 Every correct answer earns one Kiss Coupon</li>
+<li>❤️ No cheating allowed baby</li>
+<li>✨ Think carefully before answering</li>
+<li>🎟️ All coupons can be claimed at the end</li>
+<li>😭 Wrong answers may break Modak’s heart</li>
+
+</ul>
+
+<button id="playQuizBtn">
+▶ Play Love Challenge
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page" id="quizPage">
+
+<div class="quiz-container">
+
+<div class="kiss-counter">
+💋 Kiss Coupons:
+<span id="kissCount">0</span>/5
+</div>
+
+<div class="question-card">
+
+<h2 id="questionText">
+Loading Question...
+</h2>
+
+<div class="answers">
+
+<button class="answer-btn" onclick="checkAnswer(this)">Option 1</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 2</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 3</button>
+<button class="answer-btn" onclick="checkAnswer(this)">Option 4</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- COUPON -->
+
+<div id="couponPopup">
+
+<div class="coupon-card">
+
+<div class="coupon-left">
+ONE KISS
+</div>
+
+<div class="coupon-right">
+COUPON
+</div>
+
+</div>
+
+<p class="coupon-text">
+Congrats Baby Mio 😭💖
+</p>
+
+</div>
+
+<!-- PAGE 5 -->
+
+<div class="page" id="finalLovePage">
+
+<div class="final-box">
+
+<h1>
+You Earned 5 Kiss Coupons 💋🎟️
+</h1>
+
+<img src="./kiss-coupons.png"
+style="width:320px; margin-top:25px; border-radius:20px;">
+
+<br>
+
+<a href="./kiss-coupons.png" download="kiss-coupons.png">
+
+<button class="downloadBtn">
+⬇ Download Your Coupons
+</button>
+
+</a>
+
+<br>
+
+<button id="nextBlankPageBtn">
+➡ Next Page
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 6 -->
+
+<div class="page" id="loveLetterPage">
+
+<div class="love-letter-box">
+
+<h1 class="love-title">
+For My Little Mio 💖
+</h1>
+
+<p class="love-paragraph">
+
+Happy Birthday My Little Mio 🎂💖
+
+25 December 2024 se lekar aaj tak humne itna sab kuch dekha hai... police wala scene, family problems, tension, fights... par ek cheez kabhi nahi badli — hum dono 😭❤️
+
+Jab sab against tha tab bhi tu mere sath thi, aur mujhe pata hai future me bhi hum dono hamesha sath rahenge ✨
+
+Tu sirf meri girlfriend nahi hai Mio... tu meri safest place hai 🥺💖
+
+Aur haan... tera Modak tujhe har birthday pe isi tarah special feel karvata rahega 😭🎀
+
+I Love You So Much My Baby Little Mio 💋❤️
+
+</p>
+
+<button id="surpriseBtn">
+🎁 Surprise
+</button>
+
+</div>
+
+</div>
+
+<!-- PAGE 7 -->
+
+<div class="page" id="secretPlanPage">
+
+<div class="secret-box">
+
+<h1 class="secret-title">
+26•06•2026 ✨
+</h1>
+
+<p class="secret-text">
+
+💌 11:00 AM sharp...  
+Vasai Station Ticketcounter 
+
+🫶 Hint 1:   
+Din ki beginning thodi peaceful aur silent hogi 💖
+
+🎳 Hint 2:   
+Aaj koi jeetega bhi... aur koi embarrass bhi hoga 😭
+
+📸 Hint 3:   
+Aaj kuch memories sirf phone gallery ke liye nahi hongi ✨
+
+🍴 Hint 4:   
+Aaj “kya khana hai?” ka answer important nahi hoga 😌
+
+🌅 Hint 5:   
+Din khatam hone se pehle ek moment sabse zyada yaad rehega 🎂💖
+
+🎁 Hint 6:   
+Aaj ka pura plan kisi aur ko nahi pata... sirf ek Modak ko 😭✨
+
+📍Final Hint:  
+Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
+
+⏰ Sharp 11:00 AM 💖
+
+</p>
+
+<h2 class="ending-line">
+I Love My Baby Little Mio Purely ❤️
+</h2>
+
+</div>
+
+</div>
 
 <script>
+
 /* ========================================================
-   1. TIMER LOCK ENGINE
-   ========================================================
+   1. TIMER LOCK (Checks if the specific birth date has arrived)
+   ======================================================== */
+const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
+
+function checkWebsiteLock(){
+    const now = new Date().getTime();
+
+    if(now < unlockDate){
+        document.body.innerHTML = `
+        <div style="
+        width:100%;
+        height:100vh;
+        background:#ffc0cb;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        text-align:center;
+        padding:20px;
+        font-family:Poppins,sans-serif;
+        ">
+        <h1 style="font-size:75px;">🔒</h1>
+        <h2 style="
+        font-size:48px;
+        color:white;
+        margin:20px 0;
+        ">
+        Mio's Birthday Surprise 💖
+        </h2>
+        <p style="
+        font-size:24px;
+        color:white;
+        line-height:1.8;
+        ">
+        This website will unlock on:
+        <br><br>
+        26 • 06 • 2026 😭✨
+        </p>
+        <div id="lockCountdown"
+        style="
+        margin-top:35px;
+        font-size:34px;
+        font-weight:bold;
+        color:#ff2e74;
+        ">
+        Loading...
+        </div>
+        </div>
+        `;
+
+        setInterval(()=>{
+            const current = new Date().getTime();
+            const distance = unlockDate - current;
+
+            const days = Math.floor(distance / (1000*60*60*24));
+            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+            const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+            document.getElementById("lockCountdown").innerHTML = 
+                days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s";
+        },1000);
+
+        throw new Error("Website Locked");
+    }
+}
+
+checkWebsiteLock();
+
+
+/* ========================================================
+   2. FLOATING HEARTS BACKGROUND
+   ======================================================= */
+function createHearts(){
+    const container = document.getElementById('heartsContainer');
+    const heartEmojis = ['❤️', '💖', '💋', '💝', '✨', '🎀'];
+    
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
+        
+        container.appendChild(heart);
+        
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 400);
+}
+createHearts();
+
+
+/* ========================================================
+   3. PAGE FLOW NAVIGATION & AUDIO
+   ======================================================== */
+const music = document.getElementById("birthdayMusic");
+
+function playAudioSafely() {
+    music.play().catch(() => {
+        console.log("Autoplay blocked. User interaction required.");
+    });
+}
+
+document.getElementById("openBtn").addEventListener("click", () => {
+    playAudioSafely();
+    switchPage("countdownPage", "galleryPage", "flex");
+});
+
+document.getElementById("memoryBtn").addEventListener("click", () => {
+    switchPage("galleryPage", "rulesPage", "flex");
+});
+
+document.getElementById("playQuizBtn").addEventListener("click", () => {
+    switchPage("rulesPage", "quizPage", "flex");
+    loadQuestion();
+});
+
+document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
+    switchPage("finalLovePage", "loveLetterPage", "flex");
+});
+
+/* FIXED BUTTON ACCESS POINT TRIGGER */
+document.getElementById("surpriseBtn").addEventListener("click", () => {
+    switchPage("loveLetterPage", "secretPlanPage", "flex");
+});
+
+function switchPage(hideId, showId, displayType = "flex") {
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.style.display = "none");
+    
+    const targetPage = document.getElementById(showId);
+    targetPage.style.display = displayType;
+    
+    if (showId === "loveLetterPage" || showId === "secretPlanPage") {
+        targetPage.style.position = "relative";
+        targetPage.style.height = "auto";
+    } else {
+        targetPage.style.position = "absolute";
+        targetPage.style.height = "100vh";
+    }
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+
+/* ========================================================
+   4. LIVE COMPANION COUNTDOWN
+   ======================================================== */
+function updateLiveCountdown() {
+    const mainCountdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = unlockDate - now;
+
+        if (diff <= 0) {
+            document.getElementById("days").innerText = "00";
+            document.getElementById("hours").innerText = "00";
+            document.getElementById("minutes").innerText = "00";
+            document.getElementById("seconds").innerText = "00";
+            clearInterval(mainCountdownInterval);
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+        document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+        document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+        document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+    }, 1000);
+}
+updateLiveCountdown();
+
+
+/* ========================================================
+   5. INTERACTIVE LOVE BUMPS QUIZ SYSTEM
+   ======================================================== */
+let currentQuestionIndex = 0;
+let score = 0;
+
+const quizDatabase = [
+    {
+        question: "When did our unforgettable journey beautiful begin? 💖",
+        options: ["25 December 2024", "14 February 2024", "01 January 2025", "25 November 2024"],
+        correct: "25 December 2024"
+    },
+    {
+        question: "What is our official secret relationship password? 🤫✨",
+        options: ["yudkbh + icecream", "yeunb + chocolate", "yudkbh + hotchocholate", "yudkbh + coldcoffee"],
+        correct: "yudkbh + hotchocholate"
+    },
+    {
+        question: "What was the very first gift Modak ever gave to his little Mio? 🎁🥺",
+        options: ["Cute Ring", "Anklet", "Silver Chain", "Teddy Bear"],
+        correct: "Anklet"
+    },
+    {
+        question: "Where did we celebrate our very first birthday milestone together? 🎂🎈",
+        options: ["Chulna Talav", "Iskon", "Vasai Station", "Idol Temple"],
+        correct: "Iskon"
+    },
+    {
+        question: "Where did we share our magical and sweet first kiss? 💋🙈",
+        options: ["Chulna Talav", "Iskon Temple Outside", "Station Platform", "Silent Park"],
+        correct: "Chulna Talav"
+    }
+];
+
+function loadQuestion() {
+    if (currentQuestionIndex >= quizDatabase.length) {
+        setTimeout(() => {
+            switchPage("quizPage", "finalLovePage", "flex");
+        }, 600);
+        return;
+    }
+
+    const currentData = quizDatabase[currentQuestionIndex];
+    document.getElementById("questionText").innerText = currentData.question;
+    
+    const optionButtons = document.querySelectorAll(".answers .answer-btn");
+    currentData.options.forEach((option, index) => {
+        optionButtons[index].innerText = option;
+        optionButtons[index].style.background = "white";
+        optionButtons[index].style.color = "#ff2e74";
+        optionButtons[index].disabled = false;
+    });
+}
+
+function checkAnswer(selectedButton) {
+    const choice = selectedButton.innerText;
+    const correctAnswer = quizDatabase[currentQuestionIndex].correct;
+    const optionButtons = document.querySelectorAll(".answers .answer-btn");
+
+    optionButtons.forEach(btn => btn.disabled = true);
+
+    if (choice === correctAnswer) {
+        selectedButton.style.background = "#4CAF50";
+        selectedButton.style.color = "white";
+        
+        score++;
+        document.getElementById("kissCount").innerText = score;
+        
+        showCouponPopup();
+    } else {
+        selectedButton.style.background = "#f44336";
+        selectedButton.style.color = "white";
+        alert("😭 Wrong answer broke Modak's heart! Try the next one carefully baby!");
+        
+        setTimeout(() => {
+            currentQuestionIndex++;
+            loadQuestion();
+        }, 1500);
+    }
+}
+
+function showCouponPopup() {
+    const popup = document.getElementById("couponPopup");
+    popup.classList.add("show");
+
+    setTimeout(() => {
+        popup.classList.remove("show");
+        currentQuestionIndex++;
+        loadQuestion();
+    }, 2500);
+}
+
+</script>
+
+</body>
+</html>
