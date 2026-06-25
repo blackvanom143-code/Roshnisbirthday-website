@@ -765,6 +765,282 @@ const targetDate = ...
 
 
 </script>
+<script>
 
+/* ========================================================
+   1. TIMER LOCK (Checks if the specific birth date has arrived)
+   ======================================================== */
+const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
+
+function checkWebsiteLock(){
+    const now = new Date().getTime();
+
+    if(now < unlockDate){
+        document.body.innerHTML = `
+        <div style="
+        width:100%;
+        height:100vh;
+        background:#ffc0cb;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        text-align:center;
+        padding:20px;
+        font-family:Poppins,sans-serif;
+        ">
+        <h1 style="font-size:75px;">🔒</h1>
+        <h2 style="
+        font-size:48px;
+        color:white;
+        margin:20px 0;
+        ">
+        Mio's Birthday Surprise 💖
+        </h2>
+        <p style="
+        font-size:24px;
+        color:white;
+        line-height:1.8;
+        ">
+        This website will unlock on:
+        <br><br>
+        26 • 06 • 2026 😭✨
+        </p>
+        <div id="lockCountdown"
+        style="
+        margin-top:35px;
+        font-size:34px;
+        font-weight:bold;
+        color:#ff2e74;
+        ">
+        Loading...
+        </div>
+        </div>
+        `;
+
+        setInterval(()=>{
+            const current = new Date().getTime();
+            const distance = unlockDate - current;
+
+            const days = Math.floor(distance / (1000*60*60*24));
+            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+            const seconds = Math.floor((distance % (1000*60)) / 1000);
+
+            document.getElementById("lockCountdown").innerHTML = 
+                days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s";
+        },1000);
+
+        throw new Error("Website Locked");
+    }
+}
+
+// Run the website lock check immediately
+checkWebsiteLock();
+
+
+/* ========================================================
+   2. FLOATING HEARTS BACKGROUND
+   ======================================================== */
+function createHearts(){
+    const container = document.getElementById('heartsContainer');
+    const heartEmojis = ['❤️', '💖', '💋', '💝', '✨', '🎀'];
+    
+    setInterval(() => {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        
+        // Randomize floating starting layouts
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 3) + "s"; // 3s to 6s
+        heart.style.fontSize = (Math.random() * 20 + 20) + "px"; // 20px to 40px
+        
+        container.appendChild(heart);
+        
+        // Remove from DOM when animation completes
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }, 400);
+}
+// Start floating hearts immediately
+createHearts();
+
+
+/* ========================================================
+   3. PAGE FLOW NAVIGATION & AUDIO
+   ======================================================== */
+const music = document.getElementById("birthdayMusic");
+
+function playAudioSafely() {
+    music.play().catch(() => {
+        // Fallback for strict browser autoplay blocking policies
+        console.log("Autoplay blocked. Will try playing upon user interaction.");
+    });
+}
+
+// Button Navigation Hooks
+document.getElementById("openBtn").addEventListener("click", () => {
+    playAudioSafely();
+    switchPage("countdownPage", "galleryPage");
+});
+
+document.getElementById("memoryBtn").addEventListener("click", () => {
+    switchPage("galleryPage", "rulesPage");
+});
+
+document.getElementById("playQuizBtn").addEventListener("click", () => {
+    switchPage("rulesPage", "quizPage");
+    loadQuestion();
+});
+
+document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
+    switchPage("finalLovePage", "loveLetterPage");
+});
+
+document.getElementById("surpriseBtn").addEventListener("click", () => {
+    switchPage("loveLetterPage", "secretPlanPage");
+});
+
+// Helper Function for clean page transitions
+function switchPage(hideId, showId) {
+    document.getElementById(hideId).style.display = "none";
+    document.getElementById(showId).style.display = "flex";
+}
+
+
+/* ========================================================
+   4. LIVE COMPANION COUNTDOWN (For the main countdown UI)
+   ======================================================== */
+// Updates real-time if Mio stays looking at Page 1 past midnight
+function updateLiveCountdown() {
+    const mainCountdownInterval = setInterval(() => {
+        const now = new Date().getTime();
+        const diff = unlockDate - now;
+
+        if (diff <= 0) {
+            document.getElementById("days").innerText = "00";
+            document.getElementById("hours").innerText = "00";
+            document.getElementById("minutes").innerText = "00";
+            document.getElementById("seconds").innerText = "00";
+            clearInterval(mainCountdownInterval);
+            return;
+        }
+
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = d < 10 ? "0" + d : d;
+        document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
+        document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
+        document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
+    }, 1000);
+}
+updateLiveCountdown();
+
+
+/* ========================================================
+   5. INTERACTIVE LOVE BUMPS QUIZ SYSTEM
+   ======================================================== */
+let currentQuestionIndex = 0;
+let score = 0;
+
+// Customize these questions/options/answers dynamically to match your inside stories!
+const quizDatabase = [
+    {
+        question: "When did our unforgettable journey beautiful begin? 💖",
+        options: ["25 December 2024", "14 February 2024", "01 January 2025", "25 November 2024"],
+        correct: "25 December 2024"
+    },
+    {
+        question: "Who is the safest, most comforting place in the entire world? 🥺",
+        options: ["Nobody", "My Little Mio", "Random Friends", "The Internet"],
+        correct: "My Little Mio"
+    },
+    {
+        question: "What nickname does Mio lovingly use for her birthday planner? 🎀",
+        options: ["Laddu", "Modak", "Barfi", "Kaju Katli"],
+        correct: "Modak"
+    },
+    {
+        question: "What is the primary rule of this love challenge game? 💋",
+        options: ["Cheating is allowed", "No cheating allowed baby", "Skip difficult questions", "Ask friends for answers"],
+        correct: "No cheating allowed baby"
+    },
+    {
+        question: "How long will Modak keep making Mio feel extra special on her birthdays? ✨",
+        options: ["Only this year", "Just for a few years", "Hamesha aur har birthday pe", "Only when free"],
+        correct: "Hamesha aur har birthday pe"
+    }
+];
+
+function loadQuestion() {
+    if (currentQuestionIndex >= quizDatabase.length) {
+        // Quiz complete -> Route to final prize landing layout
+        setTimeout(() => {
+            switchPage("quizPage", "finalLovePage");
+        }, 600);
+        return;
+    }
+
+    const currentData = quizDatabase[currentQuestionIndex];
+    document.getElementById("questionText").innerText = currentData.question;
+    
+    const optionButtons = document.querySelectorAll(".answers .answer-btn");
+    currentData.options.forEach((option, index) => {
+        optionButtons[index].innerText = option;
+        // Reset colors/styles from prior attempts
+        optionButtons[index].style.background = "white";
+        optionButtons[index].style.color = "#ff2e74";
+        optionButtons[index].disabled = false;
+    });
+}
+
+function checkAnswer(selectedButton) {
+    const choice = selectedButton.innerText;
+    const correctAnswer = quizDatabase[currentQuestionIndex].correct;
+    const optionButtons = document.querySelectorAll(".answers .answer-btn");
+
+    // Freeze all interactive buttons immediately on selection
+    optionButtons.forEach(btn => btn.disabled = true);
+
+    if (choice === correctAnswer) {
+        selectedButton.style.background = "#4CAF50"; // Turn Option Green
+        selectedButton.style.color = "white";
+        
+        score++;
+        document.getElementById("kissCount").innerText = score;
+        
+        // Dynamic Pop up animation routine for the Kiss Coupon
+        showCouponPopup();
+    } else {
+        selectedButton.style.background = "#f44336"; // Turn Option Red
+        selectedButton.style.color = "white";
+        alert("😭 Wrong answer broke Modak's heart! Try the next one carefully baby!");
+        
+        // Progress onto next card anyway so Mio won't get stuck!
+        setTimeout(() => {
+            currentQuestionIndex++;
+            loadQuestion();
+        }, 1500);
+    }
+}
+
+function showCouponPopup() {
+    const popup = document.getElementById("couponPopup");
+    popup.classList.add("show");
+
+    // Closes pop-up and loads next layout cleanly after 2.5 seconds
+    setTimeout(() => {
+        popup.classList.remove("show");
+        currentQuestionIndex++;
+        loadQuestion();
+    }, 2500);
+}
+
+</script>
 </body>
 </html>
