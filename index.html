@@ -375,7 +375,6 @@ body {
 </head>
 <body>
 
-<!-- Setup clean references for audio tracks -->
 <audio id="birthdayMusic" loop preload="auto">
     <source src="music.mp3.mp3" type="audio/mp3">
     <source src="music.mp3" type="audio/mp3">
@@ -383,7 +382,6 @@ body {
 
 <div id="heartsContainer"></div>
 
-<!-- PAGE 1 -->
 <div class="page" id="countdownPage">
     <h1 class="main-title">Mio's Its Your Birthday ❤️</h1>
     <p class="subtitle">Waiting for the most special day ✨</p>
@@ -396,7 +394,6 @@ body {
     <button id="openBtn">🎁 Open Surprise 🎁</button>
 </div>
 
-<!-- PAGE 2 -->
 <div class="page" id="galleryPage">
     <h1 class="gallery-title">Our Cute Memories 💖</h1>
     
@@ -424,7 +421,6 @@ body {
     <button id="memoryBtn">💖 Test Your Muscle Memory 💖</button>
 </div>
 
-<!-- PAGE 3 -->
 <div class="page" id="rulesPage">
     <div class="rules-box">
         <h1 class="rules-title">Love Bond Rules 💖</h1>
@@ -439,7 +435,6 @@ body {
     </div>
 </div>
 
-<!-- PAGE 4 -->
 <div class="page" id="quizPage">
     <div class="kiss-counter">💋 Kiss Coupons: <span id="kissCount">0</span>/5</div>
     <div class="question-card">
@@ -453,7 +448,6 @@ body {
     </div>
 </div>
 
-<!-- COUPON POPUP -->
 <div id="couponPopup">
     <div class="coupon-card">
         <div class="coupon-left">ONE KISS</div>
@@ -462,7 +456,6 @@ body {
     <p class="coupon-text">Congrats Baby Mio 😭💖</p>
 </div>
 
-<!-- PAGE 5 -->
 <div class="page" id="finalLovePage">
     <div class="rules-box" style="text-align: center;">
         <h1 class="rules-title" style="font-size: clamp(24px, 5vw, 42px);">You Earned 5 Kiss Coupons 💋🎟️</h1>
@@ -476,7 +469,6 @@ body {
     </div>
 </div>
 
-<!-- PAGE 6 -->
 <div class="page" id="loveLetterPage">
     <div class="love-letter-box">
         <h1 class="love-title">For My Little Mio 💖</h1>
@@ -495,7 +487,6 @@ body {
     </div>
 </div>
 
-<!-- PAGE 7 -->
 <div class="page" id="secretPlanPage">
     <div class="secret-box">
         <h1 class="secret-title">26•06•2026 ✨</h1>
@@ -596,22 +587,16 @@ const music = document.getElementById("birthdayMusic");
 
 function forcePlayAudio() {
     if (music) {
-        // Reset properties to give it a fresh boost
         music.muted = false;
-        
-        // Use a clean Promise pattern to force execution on gesture
-        const playPromise = music.play();
-        
-        if (playPromise !== undefined) {
-            playPromise.then(() => {
-                console.log("Audio started smoothly!");
-            }).catch(error => {
-                console.log("Audio engine failed on step 1, trying fallback wake-up logic.");
-                // Try alternate strategy: reload audio buffer and play immediately
-                music.load();
-                music.play();
-            });
-        }
+        // Simple and robust play execution
+        music.play().then(() => {
+            console.log("Audio started smoothly!");
+        }).catch(error => {
+            console.log("Interruption fallback execution triggered:", error);
+            // Fallback strategy for tough modern container engines
+            music.load();
+            music.play().catch(e => console.log("System blocking audio completely: ", e));
+        });
     }
 }
 
@@ -628,12 +613,12 @@ function switchPage(hideId, showId) {
 
 // User-Gesture Activated Hooks
 document.getElementById("openBtn").addEventListener("click", () => {
-    forcePlayAudio();
+    forcePlayAudio(); // Starts the music here seamlessly on page transition!
     switchPage("countdownPage", "galleryPage");
 });
 
 document.getElementById("memoryBtn").addEventListener("click", () => {
-    forcePlayAudio();
+    forcePlayAudio(); // Safety re-verify gesture path
     switchPage("galleryPage", "rulesPage");
 });
 
@@ -648,6 +633,7 @@ document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
 });
 
 document.getElementById("surpriseBtn").addEventListener("click", () => {
+    forcePlayAudio(); // Make absolutely sure it's active when moving to the final page
     switchPage("loveLetterPage", "secretPlanPage");
 });
 
