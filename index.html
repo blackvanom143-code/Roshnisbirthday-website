@@ -392,8 +392,6 @@ font-size:18px;
 
 <div id="heartsContainer"></div>
 
-<!-- PAGE 1 -->
-
 <div class="page" id="countdownPage">
 
 <h1 class="main-title">
@@ -434,8 +432,6 @@ Waiting for the most special day ✨
 
 </div>
 
-<!-- PAGE 2 -->
-
 <div class="page" id="galleryPage">
 
 <h1 class="gallery-title">
@@ -443,19 +439,19 @@ Our Cute Memories 💖
 </h1>
 
 <div class="balloon b1">
-<img src="./photo1.jpg">
+<img src="./photo1.jpg.jpg">
 </div>
 
 <div class="balloon b2">
-<img src="./photo2.jpg">
+<img src="./photo2.jpg.jpg">
 </div>
 
 <div class="balloon b3">
-<img src="./photo3.jpg">
+<img src="./photo3.jpg.jpg">
 </div>
 
 <div class="balloon b4">
-<img src="./photo4.jpg">
+<img src="./photo4.jpg.jpg">
 </div>
 
 <button id="memoryBtn">
@@ -463,8 +459,6 @@ Our Cute Memories 💖
 </button>
 
 </div>
-
-<!-- PAGE 3 -->
 
 <div class="page" id="rulesPage">
 
@@ -491,8 +485,6 @@ Love Bond Rules 💖
 </div>
 
 </div>
-
-<!-- PAGE 4 -->
 
 <div class="page" id="quizPage">
 
@@ -524,8 +516,6 @@ Loading Question...
 
 </div>
 
-<!-- COUPON -->
-
 <div id="couponPopup">
 
 <div class="coupon-card">
@@ -545,8 +535,6 @@ Congrats Baby Mio 😭💖
 </p>
 
 </div>
-
-<!-- PAGE 5 -->
 
 <div class="page" id="finalLovePage">
 
@@ -579,8 +567,6 @@ style="width:320px; margin-top:25px; border-radius:20px;">
 
 </div>
 
-<!-- PAGE 6 -->
-
 <div class="page" id="loveLetterPage">
 
 <div class="love-letter-box">
@@ -612,8 +598,6 @@ I Love You So Much My Baby Little Mio 💋❤️
 </div>
 
 </div>
-
-<!-- PAGE 7 -->
 
 <div class="page" id="secretPlanPage">
 
@@ -653,290 +637,4 @@ Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
 
 </p>
 
-<h2 class="ending-line">
-I Love My Baby Little Mio Purely ❤️
-</h2>
-
-</div>
-
-</div>
-
-<script>
-
-/* ========================================================
-   1. TIMER LOCK (Checks if the specific birth date has arrived)
-   ======================================================== */
-const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
-
-function checkWebsiteLock(){
-    const now = new Date().getTime();
-
-    if(now < unlockDate){
-        document.body.innerHTML = `
-        <div style="
-        width:100%;
-        height:100vh;
-        background:#ffc0cb;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-        text-align:center;
-        padding:20px;
-        font-family:Poppins,sans-serif;
-        ">
-        <h1 style="font-size:75px;">🔒</h1>
-        <h2 style="
-        font-size:48px;
-        color:white;
-        margin:20px 0;
-        ">
-        Mio's Birthday Surprise 💖
-        </h2>
-        <p style="
-        font-size:24px;
-        color:white;
-        line-height:1.8;
-        ">
-        This website will unlock on:
-        <br><br>
-        26 • 06 • 2026 😭✨
-        </p>
-        <div id="lockCountdown"
-        style="
-        margin-top:35px;
-        font-size:34px;
-        font-weight:bold;
-        color:#ff2e74;
-        ">
-        Loading...
-        </div>
-        </div>
-        `;
-
-        setInterval(()=>{
-            const current = new Date().getTime();
-            const distance = unlockDate - current;
-
-            const days = Math.floor(distance / (1000*60*60*24));
-            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-            const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-            document.getElementById("lockCountdown").innerHTML = 
-                days + "d : " + hours + "h : " + minutes + "m : " + seconds + "s";
-        },1000);
-
-        throw new Error("Website Locked");
-    }
-}
-
-checkWebsiteLock();
-
-
-/* ========================================================
-   2. FLOATING HEARTS BACKGROUND
-   ======================================================= */
-function createHearts(){
-    const container = document.getElementById('heartsContainer');
-    const heartEmojis = ['❤️', '💖', '💋', '💝', '✨', '🎀'];
-    
-    setInterval(() => {
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.innerText = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
-        
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
-        heart.style.fontSize = (Math.random() * 20 + 20) + "px";
-        
-        container.appendChild(heart);
-        
-        setTimeout(() => {
-            heart.remove();
-        }, 6000);
-    }, 400);
-}
-createHearts();
-
-
-/* ========================================================
-   3. PAGE FLOW NAVIGATION & AUDIO
-   ======================================================== */
-const music = document.getElementById("birthdayMusic");
-
-function playAudioSafely() {
-    music.play().catch(() => {
-        console.log("Autoplay blocked. User interaction required.");
-    });
-}
-
-document.getElementById("openBtn").addEventListener("click", () => {
-    playAudioSafely();
-    switchPage("countdownPage", "galleryPage", "flex");
-});
-
-document.getElementById("memoryBtn").addEventListener("click", () => {
-    switchPage("galleryPage", "rulesPage", "flex");
-});
-
-document.getElementById("playQuizBtn").addEventListener("click", () => {
-    switchPage("rulesPage", "quizPage", "flex");
-    loadQuestion();
-});
-
-document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
-    switchPage("finalLovePage", "loveLetterPage", "flex");
-});
-
-/* FIXED BUTTON ACCESS POINT TRIGGER */
-document.getElementById("surpriseBtn").addEventListener("click", () => {
-    switchPage("loveLetterPage", "secretPlanPage", "flex");
-});
-
-function switchPage(hideId, showId, displayType = "flex") {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(p => p.style.display = "none");
-    
-    const targetPage = document.getElementById(showId);
-    targetPage.style.display = displayType;
-    
-    if (showId === "loveLetterPage" || showId === "secretPlanPage") {
-        targetPage.style.position = "relative";
-        targetPage.style.height = "auto";
-    } else {
-        targetPage.style.position = "absolute";
-        targetPage.style.height = "100vh";
-    }
-    
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-
-/* ========================================================
-   4. LIVE COMPANION COUNTDOWN
-   ======================================================== */
-function updateLiveCountdown() {
-    const mainCountdownInterval = setInterval(() => {
-        const now = new Date().getTime();
-        const diff = unlockDate - now;
-
-        if (diff <= 0) {
-            document.getElementById("days").innerText = "00";
-            document.getElementById("hours").innerText = "00";
-            document.getElementById("minutes").innerText = "00";
-            document.getElementById("seconds").innerText = "00";
-            clearInterval(mainCountdownInterval);
-            return;
-        }
-
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((diff % (1000 * 60)) / 1000);
-
-        document.getElementById("days").innerText = d < 10 ? "0" + d : d;
-        document.getElementById("hours").innerText = h < 10 ? "0" + h : h;
-        document.getElementById("minutes").innerText = m < 10 ? "0" + m : m;
-        document.getElementById("seconds").innerText = s < 10 ? "0" + s : s;
-    }, 1000);
-}
-updateLiveCountdown();
-
-
-/* ========================================================
-   5. INTERACTIVE LOVE BUMPS QUIZ SYSTEM
-   ======================================================== */
-let currentQuestionIndex = 0;
-let score = 0;
-
-const quizDatabase = [
-    {
-        question: "When did our unforgettable journey beautiful begin? 💖",
-        options: ["25 December 2024", "14 February 2024", "01 January 2025", "25 November 2024"],
-        correct: "25 December 2024"
-    },
-    {
-        question: "What is our official secret relationship password? 🤫✨",
-        options: ["yudkbh + icecream", "yeunb + chocolate", "yudkbh + hotchocholate", "yudkbh + coldcoffee"],
-        correct: "yudkbh + hotchocholate"
-    },
-    {
-        question: "What was the very first gift Modak ever gave to his little Mio? 🎁🥺",
-        options: ["Cute Ring", "Anklet", "Silver Chain", "Teddy Bear"],
-        correct: "Anklet"
-    },
-    {
-        question: "Where did we celebrate our very first birthday milestone together? 🎂🎈",
-        options: ["Chulna Talav", "Iskon", "Vasai Station", "Idol Temple"],
-        correct: "Iskon"
-    },
-    {
-        question: "Where did we share our magical and sweet first kiss? 💋🙈",
-        options: ["Chulna Talav", "Iskon Temple Outside", "Station Platform", "Silent Park"],
-        correct: "Chulna Talav"
-    }
-];
-
-function loadQuestion() {
-    if (currentQuestionIndex >= quizDatabase.length) {
-        setTimeout(() => {
-            switchPage("quizPage", "finalLovePage", "flex");
-        }, 600);
-        return;
-    }
-
-    const currentData = quizDatabase[currentQuestionIndex];
-    document.getElementById("questionText").innerText = currentData.question;
-    
-    const optionButtons = document.querySelectorAll(".answers .answer-btn");
-    currentData.options.forEach((option, index) => {
-        optionButtons[index].innerText = option;
-        optionButtons[index].style.background = "white";
-        optionButtons[index].style.color = "#ff2e74";
-        optionButtons[index].disabled = false;
-    });
-}
-
-function checkAnswer(selectedButton) {
-    const choice = selectedButton.innerText;
-    const correctAnswer = quizDatabase[currentQuestionIndex].correct;
-    const optionButtons = document.querySelectorAll(".answers .answer-btn");
-
-    optionButtons.forEach(btn => btn.disabled = true);
-
-    if (choice === correctAnswer) {
-        selectedButton.style.background = "#4CAF50";
-        selectedButton.style.color = "white";
-        
-        score++;
-        document.getElementById("kissCount").innerText = score;
-        
-        showCouponPopup();
-    } else {
-        selectedButton.style.background = "#f44336";
-        selectedButton.style.color = "white";
-        alert("😭 Wrong answer broke Modak's heart! Try the next one carefully baby!");
-        
-        setTimeout(() => {
-            currentQuestionIndex++;
-            loadQuestion();
-        }, 1500);
-    }
-}
-
-function showCouponPopup() {
-    const popup = document.getElementById("couponPopup");
-    popup.classList.add("show");
-
-    setTimeout(() => {
-        popup.classList.remove("show");
-        currentQuestionIndex++;
-        loadQuestion();
-    }, 2500);
-}
-
-</script>
-
-</body>
-</html>
+<h
