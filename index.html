@@ -1,271 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mio's Birthday 💖</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mio's Birthday 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { overflow-x: hidden; background: #ffc0cb; }
+        
+        /* Smooth scrolling container fixes */
+        .page { 
+            display: none; 
+            width: 100%; 
+            min-height: 100vh; 
+            justify-content: center; 
+            align-items: center; 
+            flex-direction: column; 
+            padding: 40px 20px;
+        }
+        
+        /* Active page class */
+        .page.active { display: flex !important; }
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+        /* HEARTS BACKGROUND */
+        .heart { position: fixed; font-size: 30px; animation: floatHeart linear infinite; opacity: 0.7; pointer-events: none; z-index: 1; bottom: -50px; }
+        @keyframes floatHeart { 0% { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 100% { transform: translateY(-110vh); opacity: 0; } }
 
-<style>
+        /* PAGE 1 */
+        #countdownPage { background: #ffc0cb; color: white; text-align: center; }
+        .main-title { font-size: 65px; font-weight: 700; margin-bottom: 20px; text-shadow: 0 0 20px hotpink; }
+        .subtitle { font-size: 24px; margin-bottom: 40px; }
+        .countdown { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .box { width: 140px; height: 140px; background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border-radius: 30px; display: flex; justify-content: center; align-items: center; flex-direction: column; box-shadow: 0 0 35px rgba(255,255,255,0.5); }
+        .box h1 { font-size: 48px; }
+        .box p { font-size: 18px; }
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-}
+        #openBtn, #playQuizBtn, .downloadBtn, #nextBlankPageBtn, #surpriseBtn, #memoryBtn {
+            margin-top: 30px; padding: 18px 40px; border: none; border-radius: 50px; background: #ff2e74; color: white; font-size: 22px; font-weight: bold; cursor: pointer; box-shadow: 0 0 25px hotpink; z-index: 100; position: relative; transition: 0.3s;
+        }
+        #openBtn:hover, #surpriseBtn:hover { transform: scale(1.05); }
 
-body{
-overflow-x:hidden;
-background:#ffc0cb;
-}
+        /* PAGE 2 - BALLOONS */
+        #galleryPage { background: black; min-height: 100vh; position: relative; }
+        .gallery-title { font-size: 50px; color: #ff69b4; text-shadow: 0 0 25px hotpink; margin-bottom: 50px; text-align: center; }
+        .balloon-container { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; width: 100%; max-width: 1200px; margin-bottom: 40px; }
+        .balloon { width: 200px; text-align: center; position: relative; }
+        .balloon img { width: 100%; height: 250px; object-fit: cover; border-radius: 20px; border: 5px solid white; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
 
-.page{
-display:none; /* Changed default from absolute to hidden to stop page overlapping */
-width:100%;
-min-height:100vh;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-overflow:hidden;
-padding: 20px;
-}
+        /* BOXES & CARDS */
+        .rules-box, .question-card, .love-letter-box, .secret-box { background: rgba(255,255,255,0.25); backdrop-filter: blur(10px); padding: 45px; border-radius: 35px; width: 90%; max-width: 850px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        .rules-title, .love-title, .secret-title { font-size: 45px; color: white; margin-bottom: 30px; text-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .rules-list { list-style: none; font-size: 22px; line-height: 2; color: white; text-align: left; max-width: 500px; margin: 0 auto 30px auto; }
 
-/* Show the first page initially */
-#countdownPage {
-display: flex;
-}
+        /* QUIZ */
+        .kiss-counter { font-size: 30px; font-weight: bold; color: #ff2e74; margin-bottom: 30px; }
+        .question-card h2 { font-size: 30px; color: white; margin-bottom: 30px; }
+        .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; }
+        .answer-btn { padding: 18px; border: none; border-radius: 20px; font-size: 18px; font-weight: bold; background: white; color: #ff2e74; cursor: pointer; transition: 0.2s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .answer-btn:hover { background: #ffd6e2; }
 
-/* HEARTS */
+        /* COUPON POPUP */
+        #couponPopup { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 9999; text-align: center; background: white; padding: 30px; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.2); }
+        #couponPopup.show { transform: translate(-50%, -50%) scale(1); }
+        .coupon-card { width: 320px; height: 140px; background: #ffd6e2; border-radius: 20px; display: flex; overflow: hidden; border: 2px dashed #ff2e74; }
+        .coupon-left { flex: 3; display: flex; justify-content: center; align-items: center; font-size: 36px; font-weight: bold; color: #ff2e74; }
+        .coupon-right { flex: 1; display: flex; justify-content: center; align-items: center; font-weight: bold; writing-mode: vertical-rl; font-size: 22px; border-left: 3px dashed #ff2e74; color: #ff2e74; }
+        .coupon-text { margin-top: 15px; font-size: 22px; color: #ff2e74; font-weight: bold; }
 
-.heart{
-position:absolute;
-font-size:30px;
-animation:floatHeart linear infinite;
-opacity:0.7;
-pointer-events:none;
-z-index:1;
-}
+        /* LOVE LETTER & PLAN TEXT */
+        .love-paragraph, .secret-text { font-size: 22px; line-height: 1.8; color: white; text-align: justify; white-space: pre-line; }
+        .ending-line { margin-top: 35px; font-size: 36px; color: #ff2e74; text-shadow: 0 2px 10px rgba(255,255,255,0.6); }
 
-@keyframes floatHeart{
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .main-title { font-size: 38px; }
+            .gallery-title { font-size: 34px; }
+            .answers { grid-template-columns: 1fr; }
+            .love-paragraph, .secret-text, .rules-list { font-size: 18px; }
+            .box { width: 110px; height: 110px; }
+            .box h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
 
-0%{
-transform:translateY(120vh);
-opacity:0;
-}
+    <audio id="birthdayMusic" loop>
+        <source src="music.mp3.mp3" type="audio/mp3">
+    </audio>
 
-100%{
-transform:translateY(-120vh);
-opacity:1;
-}
+    <div id="heartsContainer"></div>
 
-}
+    <div class="page active" id="countdownPage">
+        <h1 class="main-title">Mio's Its Your Birthday ❤️</h1>
+        <p class="subtitle">Waiting for the most special day ✨</p>
+        <div class="countdown">
+            <div class="box"><h1 id="days">00</h1><p>Days</p></div>
+            <div class="box"><h1 id="hours">00</h1><p>Hours</p></div>
+            <div class="box"><h1 id="minutes">00</h1><p>Minutes</p></div>
+            <div class="box"><h1 id="seconds">00</h1><p>Seconds</p></div>
+        </div>
+        <button id="openBtn">🎁 Open Surprise 🎁</button>
+    </div>
 
-/* PAGE 1 */
+    <div class="page" id="galleryPage">
+        <h1 class="gallery-title">Our Cute Memories 💖</h1>
+        <div class="balloon-container">
+            <div class="balloon"><img src="./photo1.jpg"></div>
+            <div class="balloon"><img src="./photo2.jpg"></div>
+            <div class="balloon"><img src="./photo3.jpg"></div>
+            <div class="balloon"><img src="./photo4.jpg"></div>
+        </div>
+        <button id="memoryBtn">💖 Test Your Memory & Bond 💖</button>
+    </div>
 
-#countdownPage{
-background:#ffc0cb;
-color:white;
-text-align:center;
-}
+    <div class="page" id="rulesPage">
+        <div class="rules-box">
+            <h1 class="rules-title">Love Bond Rules 💖</h1>
+            <ul class="rules-list">
+                <li>💋 Correct answer = 1 Kiss Coupon</li>
+                <li>❤️ No cheating allowed baby</li>
+                <li>✨ Think carefully before answering</li>
+                <li>🎟️ Claim all coupons at the end</li>
+                <li>😭 Wrong answers break Modak’s heart</li>
+            </ul>
+            <button id="playQuizBtn">▶ Play Love Challenge</button>
+        </div>
+    </div>
 
-.main-title{
-font-size:65px;
-font-weight:700;
-margin-bottom:20px;
-text-shadow:0 0 20px hotpink;
-}
+    <div class="page" id="quizPage">
+        <div class="kiss-counter">💋 Kiss Coupons: <span id="kissCount">0</span>/5</div>
+        <div class="question-card">
+            <h2 id="questionText">Loading Question...</h2>
+            <div class="answers">
+                <button class="answer-btn" onclick="checkAnswer(this)"></button>
+                <button class="answer-btn" onclick="checkAnswer(this)"></button>
+                <button class="answer-btn" onclick="checkAnswer(this)"></button>
+                <button class="answer-btn" onclick="checkAnswer(this)"></button>
+            </div>
+        </div>
+    </div>
 
-.subtitle{
-font-size:24px;
-margin-bottom:40px;
-}
+    <div id="couponPopup">
+        <div class="coupon-card">
+            <div class="coupon-left">ONE KISS</div>
+            <div class="coupon-right">COUPON</div>
+        </div>
+        <p class="coupon-text">Congrats Baby Mio 😭💖</p>
+    </div>
 
-.countdown{
-display:flex;
-gap:20px;
-flex-wrap:wrap;
-justify-content:center;
-}
+    <div class="page" id="finalLovePage">
+        <div class="rules-box">
+            <h1 class="rules-title" style="color: #ff2e74;">You Earned 5 Kiss Coupons 💋🎟️</h1>
+            <img src="./kiss-coupons.png" style="width:100%; max-width:320px; margin:20px 0; border-radius:20px;">
+            <br>
+            <a href="./kiss-coupons.png" download="kiss-coupons.png">
+                <button class="downloadBtn">⬇ Download Your Coupons</button>
+            </a>
+            <br>
+            <button id="nextBlankPageBtn">➡ Next Page</button>
+        </div>
+    </div>
 
-.box{
-width:150px;
-height:150px;
-background:rgba(255,255,255,0.2);
-backdrop-filter:blur(10px);
-border-radius:30px;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-box-shadow:0 0 35px rgba(255,255,255,0.5);
-}
+    <div class="page" id="loveLetterPage">
+        <div class="love-letter-box">
+            <h1 class="love-title">For My Little Mio 💖</h1>
+            <p class="love-paragraph">
+                Happy Birthday My Little Mio 🎂💖
 
-.box h1{
-font-size:55px;
-}
+                25 December 2024 se lekar aaj tak humne itna sab kuch dekha hai... police wala scene, family problems, tension, fights... par ek cheez kabhi nahi badli — hum dono 😭❤️
 
-.box p{
-font-size:20px;
-}
+                Jab sab against tha tab bhi tu mere sath thi, aur mujhe pata hai future me bhi hum dono hamesha sath rahenge ✨
 
-#openBtn,
-#playQuizBtn,
-.downloadBtn,
-#nextBlankPageBtn,
-#surpriseBtn,
-#memoryBtn{
+                Tu sirf meri girlfriend nahi hai Mio... tu meri safest place hai 🥺💖
 
-margin-top:30px;
-padding:18px 40px;
-border:none;
-border-radius:50px;
-background:#ff2e74;
-color:white;
-font-size:22px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 0 25px hotpink;
-z-index: 100;
-}
+                Aur haan... tera Modak tujhe har birthday pe isi tarah special feel karvata rahega 😭🎀
 
-/* PAGE 2 */
+                I Love You So Much My Baby Little Mio 💋❤️
+            </p>
+            <button id="surpriseBtn">🎁 Surprise</button>
+        </div>
+    </div>
 
-#galleryPage{
-background:black;
-overflow:hidden;
-height:100vh;
-}
+    <div class="page" id="secretPlanPage">
+        <div class="secret-box">
+            <h1 class="secret-title">26•06•2026 ✨</h1>
+            <p class="secret-text">
+                💌 11:00 AM sharp...  
+                Vasai Station Ticketcounter 
 
-.gallery-title{
-position:absolute;
-top:40px;
-left:50%;
-transform:translateX(-50%);
-font-size:65px;
-color:#ff69b4;
-text-shadow:0 0 25px hotpink;
-z-index:10;
-}
+                🫶 Hint 1:   
+                Din ki beginning thodi peaceful aur silent hogi 💖
 
-.balloon{
-position:absolute;
-bottom:-400px;
-width:220px;
-height:220px;
-animation:flyUp linear infinite;
-}
+                🎳 Hint 2:   
+                Aaj koi jeetega bhi... aur koi embarrass bhi hoga 😭
 
-.balloon img{
-width:100%;
-height:100%;
-object-fit:contain;
-border-radius:30px;
-border:5px solid white;
-}
+                📸 Hint 3:   
+                Aaj kuch memories sirf phone gallery ke liye nahi hongi ✨
 
-.balloon::before{
-content:"🎈";
-position:absolute;
-top:-60px;
-left:50%;
-transform:translateX(-50%);
-font-size:60px;
-}
+                🍴 Hint 4:   
+                Aaj “kya khana hai?” ka answer important nahi hoga 😌
 
-@keyframes flyUp{
+                🌅 Hint 5:   
+                Din khatam hone se pehle ek moment sabse zyada yaad rehega 🎂💖
 
-0%{
-transform:translateY(0);
-}
+                🎁 Hint 6:   
+                Aaj ka pura plan kisi aur ko nahi pata... sirf ek Modak ko 😭✨
 
-100%{
-transform:translateY(-180vh);
-}
+                📍Final Hint:  
+                Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
 
-}
+                ⏰ Sharp 11:00 AM 💖
+            </p>
+            <h2 class="ending-line">I Love My Baby Little Mio Purely ❤️</h2>
+        </div>
+    </div>
 
-.b1{left:2%; animation-duration:11s;}
-.b2{left:27%; animation-duration:13s;}
-.b3{left:52%; animation-duration:12s;}
-.b4{left:77%; animation-duration:14s;}
-
-/* RULES PAGE */
-
-#rulesPage{
-background:#ffc7d8;
-}
-
-.rules-box,
-.question-card,
-.love-letter-box,
-.secret-box{
-
-background:rgba(255,255,255,0.25);
-backdrop-filter:blur(10px);
-padding:45px;
-border-radius:35px;
-width:90%;
-max-width:850px;
-text-align:center;
-}
-
-.rules-title,
-.love-title,
-.secret-title{
-font-size:55px;
-color:white;
-margin-bottom:30px;
-}
-
-.rules-list{
-list-style:none;
-font-size:24px;
-line-height:2;
-color:white;
-}
-
-/* QUIZ PAGE */
-
-#quizPage{
-background:#ffc7d8;
-}
-
-.kiss-counter{
-font-size:30px;
-font-weight:bold;
-color:#ff2e74;
-margin-bottom:30px;
-}
-
-.question-card h2{
-font-size:34px;
-color:white;
-margin-bottom:30px;
-}
-
-.answers{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-
-.answer-btn{
-padding:18px;
-border:none;
-border-radius:20px;
-font-size:20px;
-font-weight:bold;
-background:white;
-color:#ff2e74;
-cursor:pointer;
-}
-
-/* COUPON */
-
-#couponPopup{
-position:fixed;
-top:50%;
-left:50%;
-transform:translate(-
+<script>
+/* ========================================================
+   1. TIMER LOCK ENGINE
+   ========================================================
