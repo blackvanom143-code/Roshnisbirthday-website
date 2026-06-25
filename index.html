@@ -96,6 +96,7 @@ body {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     width: max-content;
     max-width: 90%;
+    z-index: 100;
 }
 
 #openBtn:active, #playQuizBtn:active, .downloadBtn:active, #surpriseBtn:active, #memoryBtn:active {
@@ -120,7 +121,7 @@ body {
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     display: flex;
-    justify-content: center;
+    justify(content: center);
     align-items: center;
     flex-direction: column;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
@@ -138,7 +139,7 @@ body {
 
 /* PAGE 2: GALLERY BALLOONS */
 #galleryPage {
-    background: black;
+    background: #111;
     height: 100vh;
     overflow: hidden;
     position: relative;
@@ -162,14 +163,39 @@ body {
     width: clamp(130px, 25vw, 220px);
     height: clamp(130px, 25vw, 220px);
     animation: flyUp linear infinite;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.balloon img {
+.balloon-photo-frame {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 5px solid white;
+    background: #ffd6e2;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.balloon-photo-frame img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 20px;
-    border: 4px solid white;
+}
+
+/* Dynamic CSS Fallback if files aren't found locally */
+.photo-fallback {
+    font-size: clamp(30px, 8vw, 50px);
+    animation: pulse 1.5s infinite alternate;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
 }
 
 .balloon::before {
@@ -183,7 +209,7 @@ body {
 
 @keyframes flyUp {
     0% { transform: translateY(0); }
-    100% { transform: translateY(-150vh); }
+    100% { transform: translateY(-160vh); }
 }
 
 .b1 { left: 4%; animation-duration: 10s; }
@@ -360,14 +386,13 @@ body {
 </head>
 <body>
 
-<!-- Audio Element matched with literal double extension name in repository -->
 <audio id="birthdayMusic" loop preload="auto">
-    <source src="./music.mp3.mp3" type="audio/mp3">
+    <source src="music.mp3.mp3" type="audio/mp3">
+    <source src="music.mp3" type="audio/mp3">
 </audio>
 
 <div id="heartsContainer"></div>
 
-<!-- PAGE 1 -->
 <div class="page" id="countdownPage">
     <h1 class="main-title">Mio's Its Your Birthday ❤️</h1>
     <p class="subtitle">Waiting for the most special day ✨</p>
@@ -380,17 +405,37 @@ body {
     <button id="openBtn">🎁 Open Surprise 🎁</button>
 </div>
 
-<!-- PAGE 2 -->
 <div class="page" id="galleryPage">
     <h1 class="gallery-title">Our Cute Memories 💖</h1>
-    <div class="balloon b1"><img src="./photo1.jpg.jpg" alt="Memory 1"></div>
-    <div class="balloon b2"><img src="./photo2.jpg.jpg" alt="Memory 2"></div>
-    <div class="balloon b3"><img src="./photo3.jpg.jpg" alt="Memory 3"></div>
-    <div class="balloon b4"><img src="./photo4.jpg.jpg" alt="Memory 4"></div>
+    
+    <div class="balloon b1">
+        <div class="balloon-photo-frame">
+            <img src="photo1.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 1">
+            <div class="photo-fallback" style="display:none;">📸❤️</div>
+        </div>
+    </div>
+    <div class="balloon b2">
+        <div class="balloon-photo-frame">
+            <img src="photo2.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 2">
+            <div class="photo-fallback" style="display:none;">✨💖</div>
+        </div>
+    </div>
+    <div class="balloon b3">
+        <div class="balloon-photo-frame">
+            <img src="photo3.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 3">
+            <div class="photo-fallback" style="display:none;">🌸👑</div>
+        </div>
+    </div>
+    <div class="balloon b4">
+        <div class="balloon-photo-frame">
+            <img src="photo4.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 4">
+            <div class="photo-fallback" style="display:none;">🎀🧸</div>
+        </div>
+    </div>
+    
     <button id="memoryBtn">💖 Test Your Muscle Memory 💖</button>
 </div>
 
-<!-- PAGE 3 -->
 <div class="page" id="rulesPage">
     <div class="rules-box">
         <h1 class="rules-title">Love Bond Rules 💖</h1>
@@ -405,7 +450,6 @@ body {
     </div>
 </div>
 
-<!-- PAGE 4 -->
 <div class="page" id="quizPage">
     <div class="kiss-counter">💋 Kiss Coupons: <span id="kissCount">0</span>/5</div>
     <div class="question-card">
@@ -419,7 +463,6 @@ body {
     </div>
 </div>
 
-<!-- COUPON POPUP -->
 <div id="couponPopup">
     <div class="coupon-card">
         <div class="coupon-left">ONE KISS</div>
@@ -428,21 +471,19 @@ body {
     <p class="coupon-text">Congrats Baby Mio 😭💖</p>
 </div>
 
-<!-- PAGE 5 -->
 <div class="page" id="finalLovePage">
     <div class="rules-box" style="text-align: center;">
         <h1 class="rules-title" style="font-size: clamp(24px, 5vw, 42px);">You Earned 5 Kiss Coupons 💋🎟️</h1>
-        <img src="./kiss-coupons.png" style="width: 100%; max-width: 290px; margin: 20px 0; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-        <br>
-        <a href="./kiss-coupons.png" download="kiss-coupons.png" style="text-decoration: none; display: inline-block; width: 100%;">
-            <button class="downloadBtn" style="margin-top: 10px;">⬇ Download Your Coupons</button>
-        </a>
-        <br>
+        
+        <div style="width: 100%; max-width: 290px; height: 160px; margin: 20px auto; border-radius: 20px; background: linear-gradient(135deg, #ff2e74, #ffc0cb); display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; box-shadow: 0 8px 25px rgba(0,0,0,0.2); border: 4px dashed white;">
+            <h2 style="font-size: 28px;">🎟️ 5X KISSES 🎟️</h2>
+            <p style="font-size: 16px; margin-top: 5px; opacity: 0.9;">VALUED FOREVER</p>
+        </div>
+        
         <button id="nextBlankPageBtn">➡ Next Page</button>
     </div>
 </div>
 
-<!-- PAGE 6 -->
 <div class="page" id="loveLetterPage">
     <div class="love-letter-box">
         <h1 class="love-title">For My Little Mio 💖</h1>
@@ -461,7 +502,6 @@ body {
     </div>
 </div>
 
-<!-- PAGE 7 -->
 <div class="page" id="secretPlanPage">
     <div class="secret-box">
         <h1 class="secret-title">26•06•2026 ✨</h1>
@@ -496,7 +536,7 @@ body {
 
 <script>
 /* ========================================================
-   1. TIMER LOCK SYSTEM (Set to unlock June 26, 2026)
+   1. TIMER LOCK SYSTEM (Target Date Configuration)
    ======================================================== */
 const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
 
@@ -527,13 +567,13 @@ function checkWebsiteLock(){
             }
         },1000);
 
-        throw new Error("Website Temporarily Locked Until Target Date");
+        throw new Error("Website Lock Active");
     }
 }
 checkWebsiteLock();
 
 /* ========================================================
-   2. FLOATING HEARTS DECORATION ENVIRONMENT
+   2. FLOATING BACKGROUND ELEMENTS ENGINE
    ======================================================== */
 function createHearts(){
     const container = document.getElementById('heartsContainer');
@@ -550,26 +590,26 @@ function createHearts(){
         heart.style.fontSize = (Math.random() * 15 + 20) + "px";
         
         container.appendChild(heart);
-        
         setTimeout(() => { heart.remove(); }, 6000);
     }, 500);
 }
 createHearts();
 
 /* ========================================================
-   3. AUDIO CONTROL & SYSTEM PAGE NAVIGATION
+   3. HARDWARE NAVIGATION & USER GESTURE AUDIO ROUTE
    ======================================================== */
 const music = document.getElementById("birthdayMusic");
 
 function playAudioSafely() {
     if(music) {
-        music.play().catch(() => {
-            console.log("Autoplay blocked by browser policy. Waiting for user click.");
+        music.play().then(() => {
+            console.log("Audio pipeline successfully attached to user activation click.");
+        }).catch((err) => {
+            console.log("Audio context waiting for user touch interface signal:", err);
         });
     }
 }
 
-// Global Clean Page Switch Engine
 function switchPage(hideId, showId) {
     const pages = document.querySelectorAll('.page');
     pages.forEach(p => p.style.display = "none");
@@ -578,17 +618,17 @@ function switchPage(hideId, showId) {
     if(targetPage) {
         targetPage.style.display = "flex";
     }
-    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Navigation Structural Triggers
+// User-Gesture Activated Hooks
 document.getElementById("openBtn").addEventListener("click", () => {
     playAudioSafely();
     switchPage("countdownPage", "galleryPage");
 });
 
 document.getElementById("memoryBtn").addEventListener("click", () => {
+    playAudioSafely();
     switchPage("galleryPage", "rulesPage");
 });
 
@@ -601,13 +641,12 @@ document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
     switchPage("finalLovePage", "loveLetterPage");
 });
 
-// Surprise Button Action
 document.getElementById("surpriseBtn").addEventListener("click", () => {
     switchPage("loveLetterPage", "secretPlanPage");
 });
 
 /* ========================================================
-   4. RUNTIME SYSTEM COUNTDOWN (Page 1 Dash counter)
+   4. LIVE TIMER INTERFACE CONTROLLER
    ======================================================== */
 function updateLiveCountdown() {
     const mainCountdownInterval = setInterval(() => {
@@ -635,7 +674,7 @@ function updateLiveCountdown() {
 updateLiveCountdown();
 
 /* ========================================================
-   5. INTERACTIVE QUIZ ENGINE
+   5. QUIZ ENGINE
    ======================================================== */
 let currentQuestionIndex = 0;
 let score = 0;
