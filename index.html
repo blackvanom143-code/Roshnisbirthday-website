@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,14 +17,14 @@ font-family:'Poppins',sans-serif;
 }
 
 body{
-overflow:hidden;
+overflow-x:hidden;
 background:#ffc0cb;
 }
 
 .page{
 position:absolute;
 width:100%;
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -132,6 +130,7 @@ box-shadow:0 0 25px hotpink;
 display:none;
 background:black;
 overflow:hidden;
+height:100vh;
 }
 
 .gallery-title{
@@ -332,8 +331,8 @@ color:white;
 #loveLetterPage{
 display:none;
 background:#ffc7d8;
-padding:30px;
-overflow:auto;
+padding:60px 20px;
+width:100%;
 }
 
 .love-paragraph,
@@ -348,8 +347,8 @@ color:white;
 #secretPlanPage{
 display:none;
 background:#ffc0cb;
-padding:30px;
-overflow:auto;
+padding:60px 20px;
+width:100%;
 }
 
 .ending-line{
@@ -444,19 +443,19 @@ Our Cute Memories 💖
 </h1>
 
 <div class="balloon b1">
-<img src="./photo1.jpg.jpg">
+<img src="./photo1.jpg">
 </div>
 
 <div class="balloon b2">
-<img src="./photo2.jpg.jpg">
+<img src="./photo2.jpg">
 </div>
 
 <div class="balloon b3">
-<img src="./photo3.jpg.jpg">
+<img src="./photo3.jpg">
 </div>
 
 <div class="balloon b4">
-<img src="./photo4.jpg.jpg">
+<img src="./photo4.jpg">
 </div>
 
 <button id="memoryBtn">
@@ -664,110 +663,6 @@ I Love My Baby Little Mio Purely ❤️
 
 <script>
 
-/* TIMER LOCK */
-
-const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
-
-function checkWebsiteLock(){
-
-const now = new Date().getTime();
-
-if(now < unlockDate){
-
-document.body.innerHTML = `
-
-<div style="
-width:100%;
-height:100vh;
-background:#ffc0cb;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-padding:20px;
-font-family:Poppins,sans-serif;
-">
-
-<h1 style="font-size:75px;">🔒</h1>
-
-<h2 style="
-font-size:48px;
-color:white;
-margin:20px 0;
-">
-Mio's Birthday Surprise 💖
-</h2>
-
-<p style="
-font-size:24px;
-color:white;
-line-height:1.8;
-">
-This website will unlock on:
-<br><br>
-26 • 06 • 2026 😭✨
-</p>
-
-<div id="lockCountdown"
-style="
-margin-top:35px;
-font-size:34px;
-font-weight:bold;
-color:#ff2e74;
-">
-Loading...
-</div>
-
-</div>
-
-`;
-
-setInterval(()=>{
-
-const current = new Date().getTime();
-
-const distance = unlockDate - current;
-
-const days = Math.floor(distance / (1000*60*60*24));
-
-const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-
-const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-
-const seconds = Math.floor((distance % (1000*60)) / 1000);
-
-document.getElementById("lockCountdown").innerHTML =
-
-days + "d : " +
-hours + "h : " +
-minutes + "m : " +
-seconds + "s";
-
-},1000);
-
-throw new Error("Website Locked");
-
-}
-
-}
-
-checkWebsiteLock();
-/* HEARTS */
-function createHearts(){
-   ...
-}
-
-/* COUNTDOWN */
-const targetDate = ...
-
-/* baaki JS */
-
-
-</script>
-<script>
-<script>
-
 /* ========================================================
    1. TIMER LOCK (Checks if the specific birth date has arrived)
    ======================================================== */
@@ -866,7 +761,7 @@ createHearts();
 
 
 /* ========================================================
-   3. PAGE FLOW NAVIGATION & AUDIO (Fixed for Scrolling)
+   3. PAGE FLOW NAVIGATION & AUDIO
    ======================================================== */
 const music = document.getElementById("birthdayMusic");
 
@@ -891,16 +786,28 @@ document.getElementById("playQuizBtn").addEventListener("click", () => {
 });
 
 document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
-    switchPage("finalLovePage", "loveLetterPage", "block");
+    switchPage("finalLovePage", "loveLetterPage", "flex");
 });
 
 document.getElementById("surpriseBtn").addEventListener("click", () => {
-    switchPage("loveLetterPage", "secretPlanPage", "block");
+    switchPage("loveLetterPage", "secretPlanPage", "flex");
 });
 
 function switchPage(hideId, showId, displayType = "flex") {
-    document.getElementById(hideId).style.display = "none";
-    document.getElementById(showId).style.display = displayType;
+    const pages = document.querySelectorAll('.page');
+    pages.forEach(p => p.style.display = "none");
+    
+    const targetPage = document.getElementById(showId);
+    targetPage.style.display = displayType;
+    
+    if (showId === "loveLetterPage" || showId === "secretPlanPage") {
+        targetPage.style.position = "relative";
+        targetPage.style.height = "auto";
+    } else {
+        targetPage.style.position = "absolute";
+        targetPage.style.height = "100vh";
+    }
+    
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -937,7 +844,7 @@ updateLiveCountdown();
 
 
 /* ========================================================
-   5. INTERACTIVE LOVE BUMPS QUIZ SYSTEM (UPDATED CUSTOM MEMORIES)
+   5. INTERACTIVE LOVE BUMPS QUIZ SYSTEM
    ======================================================== */
 let currentQuestionIndex = 0;
 let score = 0;
@@ -960,7 +867,7 @@ const quizDatabase = [
     },
     {
         question: "Where did we celebrate our very first birthday milestone together? 🎂🎈",
-        options: ["Chulna Talav", "Iskon", "Vasai Station", "Cafe Date"],
+        options: ["Chulna Talav", "Iskon", "Vasai Station", "Idol Temple"],
         correct: "Iskon"
     },
     {
@@ -1029,6 +936,6 @@ function showCouponPopup() {
 }
 
 </script>
-</script>
+
 </body>
 </html>
