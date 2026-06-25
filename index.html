@@ -121,7 +121,7 @@ body {
     -webkit-backdrop-filter: blur(10px);
     border-radius: 20px;
     display: flex;
-    justify(content: center);
+    justify-content: center;
     align-items: center;
     flex-direction: column;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
@@ -185,17 +185,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* Dynamic CSS Fallback if files aren't found locally */
-.photo-fallback {
-    font-size: clamp(30px, 8vw, 50px);
-    animation: pulse 1.5s infinite alternate;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
 }
 
 .balloon::before {
@@ -386,6 +375,7 @@ body {
 </head>
 <body>
 
+<!-- Setup clean references for audio tracks -->
 <audio id="birthdayMusic" loop preload="auto">
     <source src="music.mp3.mp3" type="audio/mp3">
     <source src="music.mp3" type="audio/mp3">
@@ -393,6 +383,7 @@ body {
 
 <div id="heartsContainer"></div>
 
+<!-- PAGE 1 -->
 <div class="page" id="countdownPage">
     <h1 class="main-title">Mio's Its Your Birthday ❤️</h1>
     <p class="subtitle">Waiting for the most special day ✨</p>
@@ -405,37 +396,35 @@ body {
     <button id="openBtn">🎁 Open Surprise 🎁</button>
 </div>
 
+<!-- PAGE 2 -->
 <div class="page" id="galleryPage">
     <h1 class="gallery-title">Our Cute Memories 💖</h1>
     
     <div class="balloon b1">
         <div class="balloon-photo-frame">
-            <img src="photo1.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 1">
-            <div class="photo-fallback" style="display:none;">📸❤️</div>
+            <img src="photo1.jpg.jpg" alt="Mio 1">
         </div>
     </div>
     <div class="balloon b2">
         <div class="balloon-photo-frame">
-            <img src="photo2.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 2">
-            <div class="photo-fallback" style="display:none;">✨💖</div>
+            <img src="photo2.jpg.jpg" alt="Mio 2">
         </div>
     </div>
     <div class="balloon b3">
         <div class="balloon-photo-frame">
-            <img src="photo3.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 3">
-            <div class="photo-fallback" style="display:none;">🌸👑</div>
+            <img src="photo3.jpg.jpg" alt="Mio 3">
         </div>
     </div>
     <div class="balloon b4">
         <div class="balloon-photo-frame">
-            <img src="photo4.jpg.jpg" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" alt="Mio 4">
-            <div class="photo-fallback" style="display:none;">🎀🧸</div>
+            <img src="photo4.jpg.jpg" alt="Mio 4">
         </div>
     </div>
     
     <button id="memoryBtn">💖 Test Your Muscle Memory 💖</button>
 </div>
 
+<!-- PAGE 3 -->
 <div class="page" id="rulesPage">
     <div class="rules-box">
         <h1 class="rules-title">Love Bond Rules 💖</h1>
@@ -450,6 +439,7 @@ body {
     </div>
 </div>
 
+<!-- PAGE 4 -->
 <div class="page" id="quizPage">
     <div class="kiss-counter">💋 Kiss Coupons: <span id="kissCount">0</span>/5</div>
     <div class="question-card">
@@ -463,6 +453,7 @@ body {
     </div>
 </div>
 
+<!-- COUPON POPUP -->
 <div id="couponPopup">
     <div class="coupon-card">
         <div class="coupon-left">ONE KISS</div>
@@ -471,6 +462,7 @@ body {
     <p class="coupon-text">Congrats Baby Mio 😭💖</p>
 </div>
 
+<!-- PAGE 5 -->
 <div class="page" id="finalLovePage">
     <div class="rules-box" style="text-align: center;">
         <h1 class="rules-title" style="font-size: clamp(24px, 5vw, 42px);">You Earned 5 Kiss Coupons 💋🎟️</h1>
@@ -484,6 +476,7 @@ body {
     </div>
 </div>
 
+<!-- PAGE 6 -->
 <div class="page" id="loveLetterPage">
     <div class="love-letter-box">
         <h1 class="love-title">For My Little Mio 💖</h1>
@@ -502,6 +495,7 @@ body {
     </div>
 </div>
 
+<!-- PAGE 7 -->
 <div class="page" id="secretPlanPage">
     <div class="secret-box">
         <h1 class="secret-title">26•06•2026 ✨</h1>
@@ -600,13 +594,24 @@ createHearts();
    ======================================================== */
 const music = document.getElementById("birthdayMusic");
 
-function playAudioSafely() {
-    if(music) {
-        music.play().then(() => {
-            console.log("Audio pipeline successfully attached to user activation click.");
-        }).catch((err) => {
-            console.log("Audio context waiting for user touch interface signal:", err);
-        });
+function forcePlayAudio() {
+    if (music) {
+        // Reset properties to give it a fresh boost
+        music.muted = false;
+        
+        // Use a clean Promise pattern to force execution on gesture
+        const playPromise = music.play();
+        
+        if (playPromise !== undefined) {
+            playPromise.then(() => {
+                console.log("Audio started smoothly!");
+            }).catch(error => {
+                console.log("Audio engine failed on step 1, trying fallback wake-up logic.");
+                // Try alternate strategy: reload audio buffer and play immediately
+                music.load();
+                music.play();
+            });
+        }
     }
 }
 
@@ -623,16 +628,17 @@ function switchPage(hideId, showId) {
 
 // User-Gesture Activated Hooks
 document.getElementById("openBtn").addEventListener("click", () => {
-    playAudioSafely();
+    forcePlayAudio();
     switchPage("countdownPage", "galleryPage");
 });
 
 document.getElementById("memoryBtn").addEventListener("click", () => {
-    playAudioSafely();
+    forcePlayAudio();
     switchPage("galleryPage", "rulesPage");
 });
 
 document.getElementById("playQuizBtn").addEventListener("click", () => {
+    forcePlayAudio();
     switchPage("rulesPage", "quizPage");
     loadQuestion();
 });
