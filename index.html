@@ -136,7 +136,7 @@ body {
     color: white;
 }
 
-/* PAGE 2: GALLERY BALOONS */
+/* PAGE 2: GALLERY BALLOONS */
 #galleryPage {
     background: black;
     height: 100vh;
@@ -361,7 +361,7 @@ body {
 <body>
 
 <audio id="birthdayMusic" loop preload="auto">
-    <source src="music.mp3.mp3" type="audio/mp3">
+    <source src="./music.mp3" type="audio/mp3">
 </audio>
 
 <div id="heartsContainer"></div>
@@ -380,10 +380,10 @@ body {
 
 <div class="page" id="galleryPage">
     <h1 class="gallery-title">Our Cute Memories 💖</h1>
-    <div class="balloon b1"><img src="./photo1.jpg.jpg" alt="Memory 1"></div>
-    <div class="balloon b2"><img src="./photo2.jpg.jpg" alt="Memory 2"></div>
-    <div class="balloon b3"><img src="./photo3.jpg.jpg" alt="Memory 3"></div>
-    <div class="balloon b4"><img src="./photo4.jpg.jpg" alt="Memory 4"></div>
+    <div class="balloon b1"><img src="./photo1.jpg" alt="Memory 1"></div>
+    <div class="balloon b2"><img src="./photo2.jpg" alt="Memory 2"></div>
+    <div class="balloon b3"><img src="./photo3.jpg" alt="Memory 3"></div>
+    <div class="balloon b4"><img src="./photo4.jpg" alt="Memory 4"></div>
     <button id="memoryBtn">💖 Test Your Muscle Memory 💖</button>
 </div>
 
@@ -555,18 +555,16 @@ const music = document.getElementById("birthdayMusic");
 function playAudioSafely() {
     if(music) {
         music.play().catch(() => {
-            console.log("Autoplay context waiting for hardware gesture event input channel.");
+            console.log("Autoplay blocked by browser policy. Waiting for user click.");
         });
     }
 }
 
 // Global Clean Page Switch Engine
 function switchPage(hideId, showId) {
-    // Hide all layout structures cleanly
     const pages = document.querySelectorAll('.page');
     pages.forEach(p => p.style.display = "none");
     
-    // Activate target wrapper
     const targetPage = document.getElementById(showId);
     if(targetPage) {
         targetPage.style.display = "flex";
@@ -594,7 +592,7 @@ document.getElementById("nextBlankPageBtn").addEventListener("click", () => {
     switchPage("finalLovePage", "loveLetterPage");
 });
 
-// FIXED: Surprise Button fully functional structural route hook
+// Surprise Button Action
 document.getElementById("surpriseBtn").addEventListener("click", () => {
     switchPage("loveLetterPage", "secretPlanPage");
 });
