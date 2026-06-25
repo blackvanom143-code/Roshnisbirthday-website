@@ -25,7 +25,7 @@ background:#ffc0cb;
 position:absolute;
 width:100%;
 min-height:100vh;
-display:flex;
+display:none; /* Controls active display purely via JS */
 justify-content:center;
 align-items:center;
 flex-direction:column;
@@ -60,6 +60,7 @@ opacity:1;
 /* PAGE 1 */
 
 #countdownPage{
+display:flex; /* Start page is visible initially */
 background:#ffc0cb;
 color:white;
 text-align:center;
@@ -122,12 +123,12 @@ font-size:22px;
 font-weight:bold;
 cursor:pointer;
 box-shadow:0 0 25px hotpink;
+z-index:100; /* Keeps buttons active and clickable above any canvas layouts */
 }
 
 /* PAGE 2 */
 
 #galleryPage{
-display:none;
 background:black;
 overflow:hidden;
 height:100vh;
@@ -189,7 +190,6 @@ transform:translateY(-180vh);
 /* RULES PAGE */
 
 #rulesPage{
-display:none;
 background:#ffc7d8;
 }
 
@@ -225,7 +225,6 @@ color:white;
 /* QUIZ PAGE */
 
 #quizPage{
-display:none;
 background:#ffc7d8;
 }
 
@@ -313,7 +312,6 @@ color:white;
 /* FINAL PAGE */
 
 #finalLovePage{
-display:none;
 background:#ffbfd1;
 }
 
@@ -329,7 +327,6 @@ color:white;
 /* LOVE LETTER */
 
 #loveLetterPage{
-display:none;
 background:#ffc7d8;
 padding:60px 20px;
 width:100%;
@@ -345,7 +342,6 @@ color:white;
 /* SECRET PAGE */
 
 #secretPlanPage{
-display:none;
 background:#ffc0cb;
 padding:60px 20px;
 width:100%;
@@ -485,224 +481,3 @@ Love Bond Rules 💖
 </div>
 
 </div>
-
-<div class="page" id="quizPage">
-
-<div class="quiz-container">
-
-<div class="kiss-counter">
-💋 Kiss Coupons:
-<span id="kissCount">0</span>/5
-</div>
-
-<div class="question-card">
-
-<h2 id="questionText">
-Loading Question...
-</h2>
-
-<div class="answers">
-
-<button class="answer-btn" onclick="checkAnswer(this)">Option 1</button>
-<button class="answer-btn" onclick="checkAnswer(this)">Option 2</button>
-<button class="answer-btn" onclick="checkAnswer(this)">Option 3</button>
-<button class="answer-btn" onclick="checkAnswer(this)">Option 4</button>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div id="couponPopup">
-
-<div class="coupon-card">
-
-<div class="coupon-left">
-ONE KISS
-</div>
-
-<div class="coupon-right">
-COUPON
-</div>
-
-</div>
-
-<p class="coupon-text">
-Congrats Baby Mio 😭💖
-</p>
-
-</div>
-
-<div class="page" id="finalLovePage">
-
-<div class="final-box">
-
-<h1>
-You Earned 5 Kiss Coupons 💋🎟️
-</h1>
-
-<img src="./kiss-coupons.png"
-style="width:320px; margin-top:25px; border-radius:20px;">
-
-<br>
-
-<a href="./kiss-coupons.png" download="kiss-coupons.png">
-
-<button class="downloadBtn">
-⬇ Download Your Coupons
-</button>
-
-</a>
-
-<br>
-
-<button id="nextBlankPageBtn">
-➡ Next Page
-</button>
-
-</div>
-
-</div>
-
-<div class="page" id="loveLetterPage">
-
-<div class="love-letter-box">
-
-<h1 class="love-title">
-For My Little Mio 💖
-</h1>
-
-<p class="love-paragraph">
-
-Happy Birthday My Little Mio 🎂💖
-
-25 December 2024 se lekar aaj tak humne itna sab kuch dekha hai... police wala scene, family problems, tension, fights... par ek cheez kabhi nahi badli — hum dono 😭❤️
-
-Jab sab against tha tab bhi tu mere sath thi, aur mujhe pata hai future me bhi hum dono hamesha sath rahenge ✨
-
-Tu sirf meri girlfriend nahi hai Mio... tu meri safest place hai 🥺💖
-
-Aur haan... tera Modak tujhe har birthday pe isi tarah special feel karvata rahega 😭🎀
-
-I Love You So Much My Baby Little Mio 💋❤️
-
-</p>
-
-<button id="surpriseBtn">
-🎁 Surprise
-</button>
-
-</div>
-
-</div>
-
-<div class="page" id="secretPlanPage">
-
-<div class="secret-box">
-
-<h1 class="secret-title">
-26•06•2026 ✨
-</h1>
-
-<p class="secret-text">
-
-💌 11:00 AM sharp...  
-Vasai Station Ticketcounter 
-
-🫶 Hint 1:   
-Din ki beginning thodi peaceful aur silent hogi 💖
-
-🎳 Hint 2:   
-Aaj koi jeetega bhi... aur koi embarrass bhi hoga 😭
-
-📸 Hint 3:   
-Aaj kuch memories sirf phone gallery ke liye nahi hongi ✨
-
-🍴 Hint 4:   
-Aaj “kya khana hai?” ka answer important nahi hoga 😌
-
-🌅 Hint 5:   
-Din khatam hone se pehle ek moment sabse zyada yaad rehega 🎂💖
-
-🎁 Hint 6:   
-Aaj ka pura plan kisi aur ko nahi pata... sirf ek Modak ko 😭✨
-
-📍Final Hint:  
-Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
-
-⏰ Sharp 11:00 AM 💖
-
-</p>
-
-<h2 class="ending-line">
-I Love My Baby Little Mio Purely ❤️
-</h2>
-
-</div>
-
-</div>
-
-<script>
-
-/* ========================================================
-   1. TIMER LOCK (Checks if the specific birth date has arrived)
-   ======================================================== */
-const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
-
-function checkWebsiteLock(){
-    const now = new Date().getTime();
-
-    if(now < unlockDate){
-        document.body.innerHTML = `
-        <div style="
-        width:100%;
-        height:100vh;
-        background:#ffc0cb;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-        text-align:center;
-        padding:20px;
-        font-family:Poppins,sans-serif;
-        ">
-        <h1 style="font-size:75px;">🔒</h1>
-        <h2 style="
-        font-size:48px;
-        color:white;
-        margin:20px 0;
-        ">
-        Mio's Birthday Surprise 💖
-        </h2>
-        <p style="
-        font-size:24px;
-        color:white;
-        line-height:1.8;
-        ">
-        This website will unlock on:
-        <br><br>
-        26 • 06 • 2026 😭✨
-        </p>
-        <div id="lockCountdown"
-        style="
-        margin-top:35px;
-        font-size:34px;
-        font-weight:bold;
-        color:#ff2e74;
-        ">
-        Loading...
-        </div>
-        </div>
-        `;
-
-        setInterval(()=>{
-            const current = new Date().getTime();
-            const distance = unlockDate - current;
-
-            const days = Math.floor(distance / (1000*60*60*24));
-            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
-            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
-            const seconds = Math.floor((distance % (1000*60))
