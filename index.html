@@ -439,19 +439,19 @@ Our Cute Memories 💖
 </h1>
 
 <div class="balloon b1">
-<img src="./photo1.jpg.jpg">
+<img src="./photo1.jpg">
 </div>
 
 <div class="balloon b2">
-<img src="./photo2.jpg.jpg">
+<img src="./photo2.jpg">
 </div>
 
 <div class="balloon b3">
-<img src="./photo3.jpg.jpg">
+<img src="./photo3.jpg">
 </div>
 
 <div class="balloon b4">
-<img src="./photo4.jpg.jpg">
+<img src="./photo4.jpg">
 </div>
 
 <button id="memoryBtn">
@@ -637,4 +637,72 @@ Bas wahi pahunchna hai jaha usually log rukte kam aur nikalte zyada hai 👀
 
 </p>
 
-<h
+<h2 class="ending-line">
+I Love My Baby Little Mio Purely ❤️
+</h2>
+
+</div>
+
+</div>
+
+<script>
+
+/* ========================================================
+   1. TIMER LOCK (Checks if the specific birth date has arrived)
+   ======================================================== */
+const unlockDate = new Date("June 26, 2026 00:00:00").getTime();
+
+function checkWebsiteLock(){
+    const now = new Date().getTime();
+
+    if(now < unlockDate){
+        document.body.innerHTML = `
+        <div style="
+        width:100%;
+        height:100vh;
+        background:#ffc0cb;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        text-align:center;
+        padding:20px;
+        font-family:Poppins,sans-serif;
+        ">
+        <h1 style="font-size:75px;">🔒</h1>
+        <h2 style="
+        font-size:48px;
+        color:white;
+        margin:20px 0;
+        ">
+        Mio's Birthday Surprise 💖
+        </h2>
+        <p style="
+        font-size:24px;
+        color:white;
+        line-height:1.8;
+        ">
+        This website will unlock on:
+        <br><br>
+        26 • 06 • 2026 😭✨
+        </p>
+        <div id="lockCountdown"
+        style="
+        margin-top:35px;
+        font-size:34px;
+        font-weight:bold;
+        color:#ff2e74;
+        ">
+        Loading...
+        </div>
+        </div>
+        `;
+
+        setInterval(()=>{
+            const current = new Date().getTime();
+            const distance = unlockDate - current;
+
+            const days = Math.floor(distance / (1000*60*60*24));
+            const hours = Math.floor((distance % (1000*60*60*24)) / (1000*60*60));
+            const minutes = Math.floor((distance % (1000*60*60)) / (1000*60));
+            const seconds = Math.floor((distance % (1000*60))
